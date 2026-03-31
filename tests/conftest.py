@@ -34,9 +34,7 @@ from tests.contrib_fixtures.github import GitHubPatcher
 from tests.contrib_fixtures.gitlab import GitLabPatcher
 from tests.contrib_fixtures.patcher import TestProviderPatcher
 
-from .fixtures import (
-    TestVCSRelease,
-)
+from .fixtures import TestVCSRelease
 
 
 @pytest.fixture(scope="module")
@@ -260,7 +258,7 @@ def test_generic_owner(test_generic_user: GenericUser):
     return GenericOwner(
         test_generic_user.id,
         test_generic_user.username,
-        GenericOwnerType.Person,
+        GenericOwnerType.USER,
         display_name=test_generic_user.display_name,
     )
 

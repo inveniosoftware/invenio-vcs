@@ -6,7 +6,6 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 """High-level release wrapper to allow instance-specific implementation."""
 
-from abc import abstractmethod
 from contextlib import contextmanager
 from typing import TYPE_CHECKING
 
@@ -16,7 +15,7 @@ from invenio_access.utils import get_identity
 from werkzeug.utils import cached_property
 
 from invenio_vcs.generic_models import GenericRepository
-from invenio_vcs.models import Release, ReleaseStatus, Repository
+from invenio_vcs.models import Release, Repository
 
 if TYPE_CHECKING:
     from invenio_vcs.providers import RepositoryServiceProvider
@@ -127,10 +126,6 @@ class VCSRelease:
         latest_release = self.db_repo.latest_release()
         return True if not latest_release else False
 
-    def test_zipball(self):
-        """Test if the zipball URL is accessible and return the resolved URL."""
-        return self.resolve_zipball_url()
-
     def resolve_zipball_url(self, cache=True):
         """Resolve the zipball URL.
 
@@ -155,22 +150,6 @@ class VCSRelease:
 
     # High level API
 
-    def release_failed(self):
-        """Set release status to FAILED."""
-        self.db_release.status = ReleaseStatus.FAILED
-
-    def release_processing(self):
-        """Set release status to PROCESSING."""
-        self.db_release.status = ReleaseStatus.PROCESSING
-
-    def release_published(self):
-        """Set release status to PUBLISHED."""
-        self.db_release.status = ReleaseStatus.PUBLISHED
-
-    def release_pending(self):
-        """Set release status to PUBLISH_PENDING."""
-        self.db_release.status = ReleaseStatus.PUBLISH_PENDING
-
     @contextmanager
     def fetch_zipball_file(self):
         """Fetch release zipball file using the current VCS session."""
@@ -178,30 +157,24 @@ class VCSRelease:
         zipball_url = self.resolve_zipball_url()
         return self.provider.fetch_release_zipball(zipball_url, timeout)
 
-    def publish(self):
-        """Publish a VCS release."""
-        raise NotImplementedError
-
     def process_release(self):
-        """Processes a VCS release."""
-        raise NotImplementedError
+        """Processes the VCS release represented by this class instance.
 
-    def resolve_record(self):
-        """Resolves a record from the release. To be implemented by the API class implementation."""
-        raise NotImplementedError
+        The implementation of this is specified at a higher level, for example in InvenioRDM.
+        The actions that occur when a release is received are not specified by InvenioVCS.
 
-    def serialize_record(self):
-        """Serializes the release record."""
+        This method is called inside the `process_release` Celery task. If an exception is raised,
+        the call to this method will be retried up to 5 times. To prevent the task from being retried,
+        wrap the exception in `CustomVCSReleaseNoRetryError`.
+        """
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def badge_title(self):
         """Stores a string to render in the record badge title (e.g. 'DOI')."""
         return None
 
     @property
-    @abstractmethod
     def badge_value(self):
         """Stores a string to render in the record badge value (e.g. '10.1234/invenio.1234')."""
         raise NotImplementedError

@@ -7,6 +7,8 @@
 
 """Scheduled jobs for VCS integration."""
 
+from __future__ import annotations
+
 from invenio_i18n import gettext as _
 from invenio_jobs.jobs import JobType
 from marshmallow import Schema, ValidationError, fields, validates
@@ -49,9 +51,9 @@ class RefreshAccountsSchema(Schema):
         required=False,
         metadata={
             "description": _(
-                "The minimum time (in days) that needs to have elapsed since the last "
+                "The minimum time (in seconds) that needs to have elapsed since the last "
                 "sync for an account to be included in the list of accounts to sync. "
-                "The default value is 30 (days). Using 0 will cause all accounts to be "
+                "The default value is 30 days (2592000 seconds). Using 0 will cause all accounts to be "
                 "considered."
             )
         },
@@ -84,6 +86,8 @@ class RefreshAccountsSchema(Schema):
 
 
 class RefreshAccountsJob(JobType):
+    """Job to run account refresh/resync."""
+
     task = refresh_accounts
     title = _("Refresh VCS accounts")
     description = _("Refresh stale VCS accounts and re-sync their repository metadata")

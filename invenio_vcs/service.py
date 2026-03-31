@@ -6,6 +6,8 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 """Higher-level operations for the view handlers and upstream code to use."""
 
+from __future__ import annotations
+
 from dataclasses import asdict
 from typing import TYPE_CHECKING
 
@@ -39,9 +41,7 @@ from invenio_vcs.tasks import sync_repo_users as sync_repo_users_task
 from invenio_vcs.utils import iso_utcnow
 
 if TYPE_CHECKING:
-    from invenio_vcs.providers import (
-        RepositoryServiceProvider,
-    )
+    from invenio_vcs.providers import RepositoryServiceProvider
 
 
 class VCSService:
@@ -170,7 +170,6 @@ class VCSService:
         is included in the repository-user association table, which is available via
         `self.user_available_repositories`.
         """
-
         user_has_remote_access_count = self.user_available_repositories.filter(
             Repository.provider_id == db_repo.provider_id
         ).count()

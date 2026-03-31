@@ -171,5 +171,6 @@ class MultipleWebhooksError(VCSError):
     message = _("Multiple existing webhooks found.")
 
     def __init__(self, repo_provider_id: str, message=None) -> None:
+        """Constructor."""
         super().__init__(message or self.message)
         self.repo_provider_id = repo_provider_id
