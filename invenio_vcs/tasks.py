@@ -108,7 +108,6 @@ def sync_repo_users(provider, user_id, repo_provider_ids):
 
     A user ID is still required so we know which user's OAuth credentials to use.
     """
-
     from .service import VCSService
 
     try:
@@ -160,32 +159,31 @@ def process_release(provider, release_id):
 
 
 @shared_task(ignore_result=True)
-def refresh_accounts(provider: str, limit=1000, min_age=30):
+def refresh_accounts(provider: str, limit=1000, min_age=2592000):
     """
     Run the repository sync for accounts registered with a provider.
 
-    All accounts that were last synced at least `min_age` days ago will be synced
+    All accounts that were last synced at least `min_age` seconds ago will be synced
     **in the background** up to `limit` amount. All data will be synced, including
     the webhook's activation state and the list of users who have access to each repo.
 
     This task **will not** wait for each sync to complete, it will just schedule the
     tasks for each account, so it should complete relatively quickly.
     """
-
     remote = current_oauthclient.oauth.remote_apps.get(provider)
     if remote is None:
         raise ValueError(
             f"Provider {provider} not found as a registered OAuth remote app."
         )
 
-    updated_before = datetime.now(tz=timezone.utc) - timedelta(days=min_age)
+    updated_before = datetime.now(tz=timezone.utc) - timedelta(seconds=min_age)
 
     # Find remote accounts that have not been updated since `updated_before`
     remote_accounts_to_be_updated = RemoteAccount.query.filter(
         RemoteAccount.updated < updated_before,
         RemoteAccount.client_id == remote.consumer_key,
     )
-    if limit is not 0:
+    if limit != 0:
         remote_accounts_to_be_updated = remote_accounts_to_be_updated.limit(limit)
 
     tasks = 0

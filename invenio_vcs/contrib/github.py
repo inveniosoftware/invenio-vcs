@@ -17,10 +17,7 @@ from invenio_i18n import gettext as _
 from invenio_oauthclient.contrib.github import GitHubOAuthSettingsHelper
 from werkzeug.utils import cached_property
 
-from invenio_vcs.errors import (
-    ReleaseZipballFetchError,
-    VCSTokenNotFound,
-)
+from invenio_vcs.errors import ReleaseZipballFetchError, VCSTokenNotFound
 from invenio_vcs.generic_models import (
     GenericContributor,
     GenericOwner,
@@ -383,13 +380,15 @@ class GitHubProvider(RepositoryServiceProvider):
         # This API call returns the contributors sorted in order of descending number
         # of commits. See https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repository-contributors
         for c in repo.contributors(number=max):
+            # Extract the contribution count before refreshing (since this is not included in the full User object)
+            contributions_count = c.contributions_count
             c = c.refresh()
             contributors.append(
                 GenericContributor(
                     id=str(c.id),
                     username=c.login,
                     display_name=c.name,
-                    contributions_count=c.contributions_count,
+                    contributions_count=contributions_count,
                     company=c.company,
                 )
             )

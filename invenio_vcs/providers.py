@@ -61,7 +61,6 @@ class RepositoryServiceProviderFactory(ABC):
         repo_list_info_link: str | None = None,
     ):
         """Initialize the repository service provider factory."""
-
         self.provider = provider
         self.base_url = base_url
         self.webhook_receiver_url = webhook_receiver_url
@@ -245,7 +244,13 @@ class RepositoryServiceProvider(ABC):
         """
         Internal method for constructing the provider.
 
-        It's recommended to use `for_user` in the factory instead.
+        It's recommended to use `for_user` in the factory instead of calling this constructor directly,
+        as this ensures the VCS configuration is correctly present (e.g. the correct factory class is
+        being used) and that the user ID / access token are passed in a clear and readable way.
+
+        For example:
+
+            GitHubProviderFactory().for_user(user_id)
         """
         self.factory = factory
         self.user_id = user_id
@@ -282,7 +287,10 @@ class RepositoryServiceProvider(ABC):
         """
         if not self.oauth_remote_account.extra_data.get("tokens", {}).get("webhook"):
             raise RemoteAccountDataNotSet(
-                self.user_id, _("Webhook data not found for user tokens (remote data).")
+                self.user_id,
+                _(
+                    "Webhook data not found for user's token. Please disconnect and reconnect the account again."
+                ),
             )
 
         webhook_token = ProviderToken.query.filter_by(
@@ -407,7 +415,7 @@ class RepositoryServiceProvider(ABC):
     @abstractmethod
     def create_webhook(self, repository_id: str) -> str | None:
         """
-        Creates a new webhook for a given repository, trigerred by a "create release" event.
+        Creates a new webhook for a given repository, triggerred by a "create release" event.
 
         The URL destination is specified by `RepositoryServiceProvider.webhook_url`.
         Events must be delivered via an HTTP POST request with a JSON payload.
@@ -436,8 +444,10 @@ class RepositoryServiceProvider(ABC):
     @abstractmethod
     def update_webhook(self, repository_id: str, hook_id: str) -> bool:
         """
-        Edits a webhook with the given `hook_id` in `repository_id` by changing its metadata
-        to match what they would be if the hook had been freshly created by `create_webhook`.
+        Updates a webhook from the specified repository.
+
+        Edits a webhook with the given `hook_id` in `repository_id` by changing its
+        metadata to match what they would be if the hook had been freshly created by `create_webhook`.
 
         Raises an exception if user does not have permission to modify the repository/hook.
         Returns False if the repository does not exist.
@@ -456,7 +466,11 @@ class RepositoryServiceProvider(ABC):
 
     @abstractmethod
     def resolve_release_zipball_url(self, release_zipball_url: str) -> str | None:
-        """TODO: why do we have this."""
+        """Applies any additional transformation to the zipball URL, for example choosing between multiple file versions.
+
+        The behaviour of this is specific to the VCS provider. In many cases, it might not be necessary whatsoever,
+        in which case it can be configured as a no-op (by simply returning the original `release_zipball_url`).
+        """
         raise NotImplementedError
 
     @abstractmethod

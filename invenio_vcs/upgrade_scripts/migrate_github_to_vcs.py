@@ -51,7 +51,6 @@ vcs_repositories_table = sa.table(
     sa.Column("provider_id", sa.String(255), nullable=False),
     sa.Column("provider", sa.String(255), nullable=False),
     sa.Column("description", sa.String(10000), nullable=True),
-    sa.Column("license_spdx", sa.String(255), nullable=True),
     sa.Column("default_branch", sa.String(255), nullable=False),
     sa.Column("record_community_id", UUIDType, nullable=True),
     sa.Column("name", sa.String(255), nullable=False),
@@ -118,7 +117,6 @@ vcs_releases_table = sa.table(
 
 def run_upgrade_for_oauthclient_repositories():
     """Move the JSON repos from oauthclient_remoteaccount to the new vcs_repositories table."""
-
     secho(
         "Migrating JSON data from oauthclient_remoteaccount into vcs_repositories table...",
         fg="green",
@@ -162,9 +160,6 @@ def run_upgrade_for_oauthclient_repositories():
                             description=github_repo["description"],
                             name=github_repo["full_name"],
                             default_branch=github_repo["default_branch"],
-                            # We have never stored this, it is queried at runtime right now. When the first
-                            # sync happens after this migration, we will download all the license IDs from the VCS.
-                            license_spdx=None,
                             # This repo wasn't enabled, since it is not already in the repositories table.
                             hook=None,
                             enabled_by_user_id=None,
@@ -204,7 +199,6 @@ def run_upgrade_for_existing_db_repositories():
     These are (almost) all repos that are enabled and have a hook. However repos that have been enabled and then
     later disabled are also included.
     """
-
     secho(
         "Migrating old repo table entries to new vcs_repositories table...", fg="green"
     )
@@ -228,7 +222,6 @@ def run_upgrade_for_existing_db_repositories():
                         provider="github",
                         name=old_db_repo["name"],
                         default_branch="main",
-                        license_spdx=None,
                         hook=old_db_repo["hook"],
                         enabled_by_user_id=old_db_repo["user_id"],
                         created=old_db_repo["created"],
@@ -252,7 +245,6 @@ def run_upgrade_for_existing_db_repositories():
 
 def run_upgrade_for_releases():
     """Copy releases from old table to new vcs_releases table."""
-
     secho(
         "Migrating old release table entries to new vcs_releases table...", fg="green"
     )
@@ -290,7 +282,6 @@ def verify_alembic_version(expected_revision: str):
     Attempting to run the other steps of this upgrade script on an old migration version
     will have unexpected consequences.
     """
-
     secho("Verifying Alembic migration is up-to-date...", fg="green")
 
     with db.engine.connect() as connection:

@@ -15,7 +15,7 @@ from enum import Enum
 
 from invenio_accounts.models import User
 from invenio_db import db
-from invenio_db.shared import Timestamp
+from invenio_db.shared import Timestamp, UTCDateTime
 from invenio_i18n import lazy_gettext as _
 from invenio_webhooks.models import Event
 from sqlalchemy import UniqueConstraint, delete, insert, select
@@ -78,8 +78,8 @@ repository_user_association = db.Table(
     db.Column(
         "user_id", db.Integer, db.ForeignKey("accounts_user.id"), primary_key=True
     ),
-    db.Column("created", db.DateTime, nullable=False),
-    db.Column("updated", db.DateTime, nullable=False),
+    db.Column("created", UTCDateTime, nullable=False),
+    db.Column("updated", UTCDateTime, nullable=False),
 )
 
 
@@ -122,7 +122,6 @@ class Repository(db.Model, Timestamp):
     """Which VCS provider the repository is hosted by (and therefore the context in which to consider the provider_id)"""
 
     description = db.Column(db.String(10000), nullable=True)
-    license_spdx = db.Column(db.String(255), nullable=True)
     default_branch = db.Column(db.String(255), nullable=False)
 
     full_name = db.Column("name", db.String(255), nullable=False)
@@ -164,7 +163,6 @@ class Repository(db.Model, Timestamp):
         default_branch,
         full_name=None,
         description=None,
-        license_spdx=None,
         **kwargs,
     ):
         """Create the repository."""
@@ -174,7 +172,6 @@ class Repository(db.Model, Timestamp):
             full_name=full_name,
             default_branch=default_branch,
             description=description,
-            license_spdx=license_spdx,
             **kwargs,
         )
         db.session.add(obj)
@@ -218,9 +215,7 @@ class Repository(db.Model, Timestamp):
         """Return if the repository has webhooks enabled."""
         return bool(self.hook)
 
-    def latest_release(
-        self,
-    ):
+    def latest_release(self):
         """Chronologically latest successful release of the repository."""
         # Bail out fast if object (Repository) not in DB session.
         if self not in db.session:
@@ -313,11 +308,7 @@ class Release(db.Model, Timestamp):
 
     @classmethod
     def get_for_record(cls, record_id, only_draft=False) -> Release | None:
-        """Get the corresponding release for a record with a specific UUID.
-
-        :param only_draft: Only returns the release if it corresponded to a draft record on creation.
-        """
-
+        """Get the corresponding release for a record with a specific UUID."""
         query = cls.query.filter(Release.record_id == record_id)
         if only_draft:
             query = query.filter(Release.record_is_draft == True)
