@@ -9,3 +9,6 @@
 Changes
 =======
 
+Version 0.0.1 (release 2026-04-01)
+
+- initial release
