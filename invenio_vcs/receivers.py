@@ -8,6 +8,7 @@
 """Task for managing vcs integration."""
 
 from invenio_db import db
+from invenio_webhooks.models import Event as WebhookEvent
 from invenio_webhooks.models import Receiver
 
 from invenio_vcs.config import get_provider_by_id
@@ -31,7 +32,7 @@ class VCSReceiver(Receiver):
         super().__init__(receiver_id)
         self.provider_factory = get_provider_by_id(receiver_id)
 
-    def run(self, event):
+    def run(self, event: WebhookEvent):
         """Process an event.
 
         .. note::
@@ -42,7 +43,7 @@ class VCSReceiver(Receiver):
         """
         self._handle_event(event)
 
-    def _handle_event(self, event):
+    def _handle_event(self, event: WebhookEvent):
         """Handles an incoming vcs event."""
         is_create_release_event = self.provider_factory.webhook_is_create_release_event(
             event.payload
@@ -56,7 +57,7 @@ class VCSReceiver(Receiver):
             # to only be delivered for the exact event we need.
             pass
 
-    def _handle_create_release(self, event):
+    def _handle_create_release(self, event: WebhookEvent):
         """Creates a release in invenio."""
         try:
             generic_release = self.provider_factory.webhook_event_to_generic_release(
@@ -77,8 +78,14 @@ class VCSReceiver(Receiver):
                 self.provider_factory.id,
                 provider_id=generic_release.repository_id,
             )
+
             if not repo:
                 raise RepositoryNotFoundError(generic_release.repository_id)
+
+            if repo.enabled_by_user_id != event.user_id:
+                # Ensure the webhook URL contained the access token of the user who created the webhook (i.e. enabled the repository).
+                # Therefore, we ensure the webhook call contains the data of a repository/release that belongs to the user.
+                raise InvalidSenderError(event.id, event.user.id)
 
             if repo.enabled:
                 release = Release(
