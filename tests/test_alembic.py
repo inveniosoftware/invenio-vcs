@@ -11,7 +11,6 @@ import pytest
 from invenio_db.utils import alembic_test_context, drop_alembic_version_table
 
 
-@pytest.mark.skip(reason="Mergepoint conflict")
 def test_alembic(base_app, database):
     """Test alembic recipes."""
     db = database
@@ -39,6 +38,7 @@ def test_alembic(base_app, database):
 
     # Try to upgrade and downgrade
     ext.alembic.stamp()
+    # downgrade to invenio-db create migrations
     ext.alembic.downgrade(target="96e796392533")
     ext.alembic.upgrade()
     assert len(ext.alembic.compare_metadata()) == 0
