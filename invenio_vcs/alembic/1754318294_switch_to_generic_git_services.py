@@ -16,7 +16,12 @@ from sqlalchemy_utils import JSONType, UUIDType
 revision = "1754318294"
 down_revision = "6abc1c58775e"
 branch_labels = ()
-depends_on = None
+depends_on = [
+    # invenio_webhooks/alembic/a095bd179f5c_create_webhooks_tables.py
+    "a095bd179f5c",
+    # invenio_accounts/alembic/9848d0149abd_create_accounts_tables.py
+    "9848d0149abd",
+]
 
 
 def upgrade():
