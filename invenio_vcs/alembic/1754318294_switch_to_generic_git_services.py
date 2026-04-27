@@ -20,7 +20,9 @@ depends_on = [
     # invenio_webhooks/alembic/a095bd179f5c_create_webhooks_tables.py
     "a095bd179f5c",
     # invenio_accounts/alembic/9848d0149abd_create_accounts_tables.py
-    "9848d0149abd",
+    # Note: this migration is already included in the a095bd179f5c migration
+    # in webhooks and alembic does not like having the same migration included twice
+    # that's why we do not include it again
 ]
 
 
