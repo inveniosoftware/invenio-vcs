@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from typing import TYPE_CHECKING
 
 from flask import current_app
-from invenio_access.permissions import authenticated_user
+from invenio_access.permissions import any_user, authenticated_user
 from invenio_access.utils import get_identity
 from werkzeug.utils import cached_property
 
@@ -95,6 +95,7 @@ class VCSRelease:
         """Generates release owner's user identity."""
         identity = get_identity(self.db_repo.enabled_by_user)
         identity.provides.add(authenticated_user)
+        identity.provides.add(any_user)
         identity.user = self.db_repo.enabled_by_user
         return identity
 
