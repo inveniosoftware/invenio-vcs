@@ -16,7 +16,7 @@ from celery import shared_task
 from flask import current_app, g
 from invenio_db import db
 from invenio_i18n import gettext as _
-from invenio_oauthclient.models import RemoteAccount
+from invenio_oauthclient.models import RemoteAccount, RemoteToken
 from invenio_oauthclient.proxies import current_oauthclient
 
 from invenio_vcs.config import get_provider_by_id
@@ -61,7 +61,13 @@ def disconnect_provider(provider_id, user_id, access_token, repo_hooks):
     try:
         # Create a nested transaction to make sure that hook deletion + token revoke is atomic
         with db.session.begin_nested():
-            svc = VCSService.for_provider_and_token(provider_id, user_id, access_token)
+            remote_token = RemoteToken.get_by_token(provider_id, access_token)
+            assert remote_token is not None
+
+            if remote_token.is_expired:
+                remote_token.refresh_access_token()
+
+            svc = VCSService.for_provider_and_token(provider_id, user_id, remote_token)
 
             for repo_id, repo_hook in repo_hooks:
                 if svc.disable_repository(repo_id, repo_hook):
