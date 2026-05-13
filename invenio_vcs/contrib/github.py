@@ -69,6 +69,9 @@ class GitHubProviderFactory(RepositoryServiceProviderFactory):
         self._github_specific_config.update(
             shared_secret="",
             insecure_ssl=False,
+            # Corresponds to the `type` parameter here: https://docs.github.com/en/rest/repos/repos?apiVersion=2026-03-10#list-repositories-for-the-authenticated-user.
+            # Set this to `public` to only sync the public repos that a user has access to.
+            allowed_repository_type="all",
         )
         self._github_specific_config.update(config)
 
@@ -225,7 +228,9 @@ class GitHubProvider(RepositoryServiceProvider):
     def list_repositories(self):
         """List the user's top repos."""
         repos: dict[str, GenericRepository] = {}
-        for repo in self._github.repositories():
+        for repo in self._github.repositories(
+            type=self.factory.provider_specific_config.get("allowed_repository_type")
+        ):
             assert isinstance(repo, ShortRepository)
 
             if repo.permissions["admin"]:
