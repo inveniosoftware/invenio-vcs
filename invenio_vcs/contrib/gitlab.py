@@ -11,7 +11,8 @@
 
 from __future__ import annotations
 
-from typing import Any
+import itertools
+from typing import TYPE_CHECKING, Any
 
 import dateutil
 import gitlab
@@ -36,6 +37,10 @@ from invenio_vcs.providers import (
     RepositoryServiceProvider,
     RepositoryServiceProviderFactory,
 )
+
+if TYPE_CHECKING:
+    from gitlab.base import RESTObjectList
+    from gitlab.v4.objects.projects import Project
 
 
 def _gitlab_response_error_handler(f):
@@ -93,7 +98,11 @@ class GitLabProviderFactory(RepositoryServiceProviderFactory):
         )
 
         self._gitlab_specific_config = dict()
-        self._gitlab_specific_config.update(shared_validation_token="")
+        self._gitlab_specific_config.update(
+            shared_validation_token="",
+            # Only sync projects with one of these visibilities.
+            allowed_project_visibilities=["private", "internal", "public"],
+        )
         self._gitlab_specific_config.update(config)
 
     def update_config_with_override(self, config_override: dict):
@@ -260,11 +269,25 @@ class GitLabProvider(RepositoryServiceProvider):
     def list_repositories(self) -> dict[str, GenericRepository] | None:
         """List all projects."""
         repos: dict[str, GenericRepository] = {}
-        for project in self._gitlab.projects.list(
-            iterator=True,
-            simple=False,
-            min_access_level=gitlab.const.MAINTAINER_ACCESS,
+
+        # `visibility` only allows one value; you cannot query e.g. 'internal OR public'.
+        # So we create one iterator for each allowed visibility and then chain them together.
+        # This doesn't have a particularly large performance impact since each project will
+        # still only be returned once.
+        iters: list[RESTObjectList[Project]] = []
+        for visibility in self.factory.provider_specific_config.get(
+            "allowed_project_visibilities", []
         ):
+            iters.append(
+                self._gitlab.projects.list(
+                    iterator=True,
+                    simple=False,
+                    min_access_level=gitlab.const.MAINTAINER_ACCESS,
+                    visibility=visibility,
+                )
+            )
+
+        for project in itertools.chain(*iters):
             repos[str(project.id)] = GenericRepository(
                 id=str(project.id),
                 full_name=project.path_with_namespace,
