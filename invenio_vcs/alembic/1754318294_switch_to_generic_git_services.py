@@ -16,7 +16,9 @@ from sqlalchemy_utils import JSONType, UUIDType
 revision = "1754318294"
 down_revision = "6abc1c58775e"
 branch_labels = ()
-depends_on = None
+# Depends on Invenio-Webhooks for foreign key reference
+# See https://github.com/inveniosoftware/invenio-webhooks/blob/9eda483685fac20d28d0036218aa178ce5bb2879/invenio_webhooks/alembic/a095bd179f5c_create_webhooks_tables.py#L32
+depends_on = "a095bd179f5c"
 
 
 def upgrade():
