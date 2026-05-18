@@ -288,10 +288,17 @@ class GitLabProvider(RepositoryServiceProvider):
             )
 
         for project in itertools.chain(*iters):
+            default_branch = getattr(project, "default_branch", None)
+            if default_branch is None:
+                # For projects without a repository (i.e. a file tree), the `default_branch` attribute is not returned
+                # in the API response. These projects inherently cannot contain releases so they cannot be synced to
+                # InvenioRDM. We therefore exclude them from the list.
+                continue
+
             repos[str(project.id)] = GenericRepository(
                 id=str(project.id),
                 full_name=project.path_with_namespace,
-                default_branch=project.default_branch,
+                default_branch=default_branch,
                 description=project.description,
                 # The license is not returned in the project list, and it is not needed here.
                 license_spdx=None,
