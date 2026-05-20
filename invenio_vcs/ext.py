@@ -83,7 +83,7 @@ def finalize_app_api(app):
 
 def init_menu(app):
     """Init menu."""
-    for provider in get_provider_list(app):
+    for index, provider in enumerate(get_provider_list(app)):
 
         def is_active(current_node):
             return (
@@ -101,7 +101,8 @@ def init_menu(app):
                 ),
                 provider=provider.name,
             ),
-            order=10,
+            # See https://github.com/inveniosoftware/invenio-app-rdm/issues/3432#issuecomment-4459637019
+            order=10 + index,
             active_when=is_active,
         )
 
