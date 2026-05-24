@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2025 CERN.
-#
-# Invenio-VCS is free software; you can redistribute it and/or modify
-# it under the terms of the MIT License; see LICENSE file for more details.
+# SPDX-FileCopyrightText: 2025 CERN.
+# SPDX-License-Identifier: MIT
 """Migration script for the old GitHub-only integration to the new generic VCS integration."""
 
 import sys
