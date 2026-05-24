@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-# This file is part of Invenio.
-# Copyright (C) 2026 CERN.
-#
-# Invenio is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
+# SPDX-FileCopyrightText: 2026 CERN.
+# SPDX-License-Identifier: MIT
 """High-level release wrapper to allow instance-specific implementation."""
 
 from contextlib import contextmanager
