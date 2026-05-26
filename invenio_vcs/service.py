@@ -292,7 +292,7 @@ class VCSService:
             # expect `repo_provider_id` to exist already.
             raise RepositoryNotFoundError(repo_provider_id)
 
-        vcs_user_ids = self.provider.list_repository_user_ids(db_repo.provider_id)
+        vcs_user_ids = self.provider.list_repository_user_ids(repo_provider_id)
         if vcs_user_ids is None:
             return
 
