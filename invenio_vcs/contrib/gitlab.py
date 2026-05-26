@@ -19,6 +19,7 @@ import gitlab
 import gitlab.const
 import requests
 from flask import current_app
+from gitlab.exceptions import GitlabOperationError
 from invenio_i18n import gettext as _
 from invenio_oauthclient import current_oauthclient
 from werkzeug.utils import cached_property
@@ -49,12 +50,7 @@ def _gitlab_response_error_handler(f):
     def inner_function(*args, **kwargs):
         try:
             return f(*args, **kwargs)
-        except gitlab.GitlabGetError as e:
-            if e.response_code == 404:
-                return None
-            else:
-                raise e
-        except gitlab.GitlabCreateError as e:
+        except GitlabOperationError as e:
             if e.response_code == 404:
                 return None
             else:
@@ -383,11 +379,11 @@ class GitLabProvider(RepositoryServiceProvider):
 
     @_gitlab_response_error_handler
     def list_repository_user_ids(self, repository_id: str) -> list[str] | None:
-        """See https://docs.gitlab.com/api/members/#list-all-members-of-a-group-or-project-including-inherited-and-invited-members."""
+        """See https://docs.gitlab.com/api/projects/#list-all-members-of-a-project."""
+        assert repository_id.isdigit()
+        proj = self._gitlab.projects.get(int(repository_id), lazy=True)
         user_ids: list[str] = []
-        for member in self._gitlab.projects.get(
-            int(repository_id), lazy=True
-        ).members_all.list(iterator=True):
+        for member in proj.members_all.list(iterator=True):
             if member.access_level >= gitlab.const.MAINTAINER_ACCESS:
                 user_ids.append(str(member.id))
         return user_ids
