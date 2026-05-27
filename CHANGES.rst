@@ -9,6 +9,10 @@
 Changes
 =======
 
+Version 0.1.1 (released 2026-05-26)
+
+- fix(gitlab): better error handling for 404 errors; adjust method to reduce request count
+
 Version 0.1.0 (released 2026-05-18)
 
 - feat(tasks): mark release task as `PROCESSING` before generic method
