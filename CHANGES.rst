@@ -9,6 +9,11 @@
 Changes
 =======
 
+Version v0.2.0 (released 2026-05-29)
+
+- chore(setup): bump dependencies
+- fix: add missing migration dependencies
+
 Version 0.1.1 (released 2026-05-26)
 
 - fix(gitlab): better error handling for 404 errors; adjust method to reduce request count
