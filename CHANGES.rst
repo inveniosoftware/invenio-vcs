@@ -6,6 +6,12 @@
 Changes
 =======
 
+Version v0.4.0 (released 2026-06-18)
+
+- chore(setup): bump dependencies
+- chore(git-blame): ignore the SPDX license header commit
+- chore(licenses): update license headers to use SPDX
+
 Version v0.3.0 (released 2026-06-05)
 
 - chore(setup): bump dependencies
