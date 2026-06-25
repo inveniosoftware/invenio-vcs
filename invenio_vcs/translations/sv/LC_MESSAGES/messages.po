@@ -1,0 +1,378 @@
+# Swedish translations for invenio-vcs.
+# Copyright (C) 2026 CERN
+# This file is distributed under the same license as the invenio-vcs
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: invenio-vcs 0.4.0\n"
+"Report-Msgid-Bugs-To: info@inveniosoftware.org\n"
+"POT-Creation-Date: 2026-06-25 16:35+0200\n"
+"PO-Revision-Date: 2026-06-25 16:39+0200\n"
+"Last-Translator: Sam Arbid <samaa2@kth.se>\n"
+"Language-Team: sv <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.18.0\n"
+"X-Generator: Poedit 3.9\n"
+
+#: invenio_vcs/errors.py:17
+msgid "The user cannot access this repository"
+msgstr "Användaren kan inte komma åt detta repository"
+
+#: invenio_vcs/errors.py:31
+msgid "This repository is not enabled for webhooks."
+msgstr "Detta repository är inte aktiverat för webhooks."
+
+#: invenio_vcs/errors.py:42
+msgid "The repository does not exist."
+msgstr "Repositoryt finns inte."
+
+#: invenio_vcs/errors.py:53
+msgid "Invalid sender for event"
+msgstr "Ogiltig avsändare för händelse"
+
+#: invenio_vcs/errors.py:65
+msgid "The release has already been received."
+msgstr "Releasen har redan tagits emot."
+
+#: invenio_vcs/errors.py:90
+msgid "The OAuth session token was not found."
+msgstr "OAuth-sessionstoken hittades inte."
+
+#: invenio_vcs/errors.py:101
+msgid "RemoteAccount not found for user"
+msgstr "RemoteAccount hittades inte för användaren"
+
+#: invenio_vcs/errors.py:112
+msgid "RemoteAccount extra data not set for user."
+msgstr "Extra data för RemoteAccount har inte angetts för användaren."
+
+#: invenio_vcs/errors.py:123
+msgid "Release does not exist."
+msgstr "Releasen finns inte."
+
+#: invenio_vcs/errors.py:133
+msgid "Provider API returned an unexpected error."
+msgstr "Leverantörens API returnerade ett oväntat fel."
+
+#: invenio_vcs/errors.py:143
+msgid "Error fetching release zipball file."
+msgstr "Fel vid hämtning av zipball-fil för release."
+
+#: invenio_vcs/errors.py:153
+msgid "Provider did not return user profile information."
+msgstr "Leverantören returnerade ingen användarprofilinformation."
+
+#: invenio_vcs/errors.py:167
+msgid "Multiple existing webhooks found."
+msgstr "Flera befintliga webhooks hittades."
+
+#: invenio_vcs/ext.py:98
+#, python-format
+msgid "%(icon)s %(provider)s"
+msgstr "%(icon)s %(provider)s"
+
+#: invenio_vcs/jobs.py:28
+msgid "The name of the locally configured provider to sync accounts for. If not specified, will use the first entry in the list of configured providers."
+msgstr "Namnet på den lokalt konfigurerade leverantören som konton ska synkroniseras för. Om inget anges används den första posten i listan över konfigurerade leverantörer."
+
+#: invenio_vcs/jobs.py:39
+msgid "The maximum number of accounts to sync in one run. Running the job multiple times will make it continue handling further accounts. The default value is 1000. Specifying 0 removes the limit."
+msgstr "Det maximala antalet konton att synkronisera i en körning. Om jobbet körs flera gånger fortsätter det att hantera ytterligare konton. Standardvärdet är 1000. Om 0 anges tas gränsen bort."
+
+#: invenio_vcs/jobs.py:50
+msgid "The minimum time (in seconds) that needs to have elapsed since the last sync for an account to be included in the list of accounts to sync. The default value is 30 days (2592000 seconds). Using 0 will cause all accounts to be considered."
+msgstr "Den minsta tid (i sekunder) som måste ha förflutit sedan den senaste synkroniseringen för att ett konto ska inkluderas i listan över konton att synkronisera. Standardvärdet är 30 dagar (2592000 sekunder). Om 0 används beaktas alla konton."
+
+#: invenio_vcs/jobs.py:71
+msgid "No VCS providers configured on the instance."
+msgstr "Inga VCS-leverantörer har konfigurerats på instansen."
+
+#: invenio_vcs/jobs.py:80
+#, python-format
+msgid "Provider with ID %(value)s not registered on instance."
+msgstr "Leverantör med ID %(value)s är inte registrerad på instansen."
+
+#: invenio_vcs/jobs.py:88
+msgid "Refresh VCS accounts"
+msgstr "Uppdatera VCS-konton"
+
+#: invenio_vcs/jobs.py:89
+msgid "Refresh stale VCS accounts and re-sync their repository metadata"
+msgstr "Uppdatera inaktuella VCS-konton och synkronisera deras repositorymetadata på nytt"
+
+#: invenio_vcs/providers.py:288
+msgid "Webhook data not found for user's token. Please disconnect and reconnect the account again."
+msgstr "Webhook-data hittades inte för användarens token. Koppla från och återanslut kontot igen."
+
+#: invenio_vcs/service.py:143
+msgid "Last sync data is not set for user (remote data)."
+msgstr "Data för senaste synkronisering har inte angetts för användaren (fjärrdata)."
+
+#: invenio_vcs/service.py:374
+msgid "Remote account was not found for user."
+msgstr "Fjärrkontot hittades inte för användaren."
+
+#: invenio_vcs/tasks.py:71
+msgid "Deleted hook from vcs repository."
+msgstr "Tog bort hook från VCS-repository."
+
+#: invenio_vcs/contrib/github.py:41
+msgid "Automatically archive your GitHub repositories"
+msgstr "Arkivera dina GitHub-repositories automatiskt"
+
+#: invenio_vcs/contrib/github.py:55
+msgid "repository"
+msgstr "repository"
+
+#: invenio_vcs/contrib/github.py:56
+msgid "repositories"
+msgstr "repositories"
+
+#: invenio_vcs/contrib/github.py:59
+msgid "If your organization's repositories do not show up in the list, please ensure you have enabled third-party access."
+msgstr "Om din organisations repositories inte visas i listan, kontrollera att du har aktiverat åtkomst för tredje part."
+
+#: invenio_vcs/contrib/gitlab.py:67
+msgid "Automatically archive your GitLab projects"
+msgstr "Arkivera dina GitLab-projekt automatiskt"
+
+#: invenio_vcs/contrib/gitlab.py:81
+msgid "project"
+msgstr "projekt"
+
+#: invenio_vcs/contrib/gitlab.py:82
+msgid "projects"
+msgstr "projekt"
+
+#: invenio_vcs/contrib/gitlab.py:87
+msgid "If your project does not show up in the list, please ensure you have at least the 'Maintainer' role on the project or its group."
+msgstr "Om ditt projekt inte visas i listan, kontrollera att du åtminstone har rollen 'Maintainer' för projektet eller dess grupp."
+
+#: invenio_vcs/contrib/gitlab.py:418
+#, python-format
+msgid "Managed by %(app_name)s. Please do not edit."
+msgstr "Hanteras av %(app_name)s. Redigera inte."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:15
+msgid "Sync now"
+msgstr "Synkronisera nu"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:16
+msgid "Syncing"
+msgstr "Synkroniserar"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:20
+#, python-brace-format
+msgid "(updated {})"
+msgstr "(uppdaterad {})"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:32
+msgid "Get started"
+msgstr "Kom igång"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:38 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:89
+msgid "Flip the switch"
+msgstr "Slå om reglaget"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:41
+msgid ""
+"Select the repository you want to preserve, and toggle\n"
+"                  the switch below to turn on automatic preservation of your software."
+msgstr "Välj det repository du vill bevara och slå på reglaget nedan för att aktivera automatiskt bevarande av din programvara."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:47 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:105
+msgid "Create a release"
+msgstr "Skapa en release"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:51
+#, python-format
+msgid "Go to %(name)s and <a href=\"%(release_docs_link)s\" target=\"_blank\">create a release <i class=\"small icon external\" aria-hidden=\"true\"></i></a>. %(site_name)s will automatically receive and process your release."
+msgstr "Gå till %(name)s och <a href=\"%(release_docs_link)s\" target=\"_blank\">skapa en release <i class=\"small icon external\" aria-hidden=\"true\"></i></a>. %(site_name)s tar automatiskt emot och behandlar din release."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:62
+msgid "Check the status"
+msgstr "Kontrollera statusen"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:66
+#, python-format
+msgid "Click on a %(repository_name)s to view the status of each release, including whether it was successful and if you need to take any additional steps."
+msgstr "Klicka på ett %(repository_name)s för att visa statusen för varje release, inklusive om den lyckades och om du behöver vidta några ytterligare åtgärder."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:82
+#, python-format
+msgid "Enabled %(repository_name_plural)s"
+msgstr "Aktiverade %(repository_name_plural)s"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:105
+msgid "More info"
+msgstr "Mer information"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:115
+#, python-format
+msgid "You have no %(repository_name_plural)s on %(name)s."
+msgstr "Du har inga %(repository_name_plural)s på %(name)s."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:118
+#, python-format
+msgid ""
+"Go to <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> and create your first or\n"
+"          click the Sync button to synchronize the latest changes from %(name)s."
+msgstr "Gå till <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> och skapa ditt första eller klicka på synkroniseringsknappen för att synkronisera de senaste ändringarna från %(name)s."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:137
+#, python-format
+msgid "%(name)s"
+msgstr "%(name)s"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:140
+msgid "Software preservation made simple!"
+msgstr "Programvarubevarande gjort enkelt!"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:144
+#, python-format
+msgid "Connect your %(name)s account"
+msgstr "Anslut ditt %(name)s-konto"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:147
+msgid "Connect"
+msgstr "Anslut"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:150
+#, python-format
+msgid "To get started, click \"Connect\" and we will get a list of your %(repository_name_plural)s from %(name)s."
+msgstr "För att komma igång klickar du på \"Anslut\" så hämtar vi en lista över dina %(repository_name_plural)s från %(name)s."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:15
+#, python-format
+msgid "View %(repository_name)s on %(name)s"
+msgstr "Visa %(repository_name)s på %(name)s"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:16
+#, python-format
+msgid "View %(repository_name)s on %(name)s:"
+msgstr "Visa %(repository_name)s på %(name)s:"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:13 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:153
+msgid "Received"
+msgstr "Mottagen"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:17
+msgid "Processing"
+msgstr "Bearbetas"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:21
+msgid "Published"
+msgstr "Publicerad"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:25
+msgid "Failed"
+msgstr "Misslyckades"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:29
+msgid "Deleted"
+msgstr "Borttagen"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:33
+msgid "Pending review"
+msgstr "Väntar på granskning"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:64
+#, python-format
+msgid "View release on %(name)s"
+msgstr "Visa release på %(name)s"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:93 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:120
+msgid "Citation File"
+msgstr "Citeringsfil"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:98
+msgid "Payload"
+msgstr "Nyttolast"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:107 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:174
+msgid "Errors"
+msgstr "Fel"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:122
+msgid "Create CITATION.cff"
+msgstr "Skapa CITATION.cff"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:126
+msgid ""
+"files are plain text files with human-\n"
+"                        and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software."
+msgstr "filer är vanliga textfiler med citeringsinformation för programvara som är läsbar för både människor och maskiner. Kodutvecklare kan inkludera dem i sina repositories för att låta andra veta hur deras programvara ska citeras korrekt."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:129
+msgid "An example of the CITATION.cff for this release can be found below:"
+msgstr "Ett exempel på CITATION.cff för denna release finns nedan:"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:152
+#, python-format
+msgid "%(name)s Payload"
+msgstr "%(name)s-nyttolast"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:16
+msgid "Disable"
+msgstr "Inaktivera"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:17
+msgid "Enable"
+msgstr "Aktivera"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:15
+msgid "Header"
+msgstr "Sidhuvud"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:24
+#, python-format
+msgid "Go back to all %(repository_name_plural)s"
+msgstr "Gå tillbaka till alla %(repository_name_plural)s"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:59
+msgid "Releases"
+msgstr "Releaser"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:60
+msgid "Create release"
+msgstr "Skapa release"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:71 invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:85
+msgid "Get started!"
+msgstr "Kom igång!"
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:72
+#, python-format
+msgid "Go to %(name)s and make your first release."
+msgstr "Gå till %(name)s och skapa din första release."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:92
+msgid "Toggle the switch below to turn on/off automatic preservation of your repository."
+msgstr "Slå om reglaget nedan för att aktivera eller inaktivera automatiskt bevarande av ditt repository."
+
+#: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:108
+#, python-brace-format
+msgid ""
+"Go to {} and create a release. {}\n"
+"                  will automatically receive and process your release."
+msgstr ""
+"Gå till {} och skapa en release. {}\n"
+"                  tar automatiskt emot och behandlar din release."
+
+#: invenio_vcs/views/vcs.py:53
+msgid "Account must be connected to the VCS provider."
+msgstr "Kontot måste vara anslutet till VCS-leverantören."
+
+#: invenio_vcs/views/vcs.py:193
+msgid "Failed to enable repository, hook creation not successful."
+msgstr "Det gick inte att aktivera repositoryt, hook skapades inte."
+
+#: invenio_vcs/views/vcs.py:216
+msgid "Failed to disable repository, hook removal not successful."
+msgstr "Det gick inte att inaktivera repositoryt, hook togs inte bort."
