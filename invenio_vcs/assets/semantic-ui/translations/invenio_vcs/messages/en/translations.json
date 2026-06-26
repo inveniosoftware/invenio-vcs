@@ -1,0 +1,8 @@
+{
+  "Repository sync started in the background. Please reload the page in about a minute.": "Repository sync started in the background. Please reload the page in about a minute.",
+  "The repository sync failed (status {{status}}). Please try again later.": "The repository sync failed (status {{status}}). Please try again later.",
+  "This action seems to take some time, refresh the page after several minutes to inspect the synchronisation.": "This action seems to take some time, refresh the page after several minutes to inspect the synchronisation.",
+  "There has been a problem: {{error}}": "There has been a problem: {{error}}",
+  "Repository enabled successfully. Please reload the page.": "Repository enabled successfully. Please reload the page.",
+  "Failed to update repository (status {{status}}). Please try again later.": "Failed to update repository (status {{status}}). Please try again later."
+}

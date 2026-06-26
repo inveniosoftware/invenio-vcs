@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 import $ from "jquery";
+import { i18next } from "@translations/invenio_vcs/i18next";
 
 function addResultMessage(element, color, icon, message) {
   element.classList.remove("hidden");
@@ -88,7 +89,9 @@ if (sync_button) {
             resultMessage,
             "positive",
             "checkmark",
-            "Repository sync started in the background. Please reload the page in about a minute."
+            i18next.t(
+              "Repository sync started in the background. Please reload the page in about a minute."
+            )
           );
           sync_button.classList.remove("disabled");
           setTimeout(function () {
@@ -99,7 +102,10 @@ if (sync_button) {
             resultMessage,
             "negative",
             "cancel",
-            `The repository sync failed (status ${response.status}). Please try again later.`
+            i18next.t(
+              "The repository sync failed (status {{status}}). Please try again later.",
+              { status: response.status }
+            )
           );
           setTimeout(function () {
             resultMessage.classList.add("hidden");
@@ -113,7 +119,9 @@ if (sync_button) {
             resultMessage,
             "warning",
             "hourglass",
-            "This action seems to take some time, refresh the page after several minutes to inspect the synchronisation."
+            i18next.t(
+              "This action seems to take some time, refresh the page after several minutes to inspect the synchronisation."
+            )
           );
         }
         else {
@@ -121,7 +129,7 @@ if (sync_button) {
             resultMessage,
             "negative",
             "cancel",
-            `There has been a problem: ${error}`
+            i18next.t("There has been a problem: {{error}}", { error })
           );
            setTimeout(function () {
             resultMessage.classList.add("hidden");
@@ -171,7 +179,7 @@ function sendEnableDisableRequest(checked, repo) {
           switchMessage,
           "positive",
           "checkmark",
-          "Repository enabled successfully. Please reload the page."
+          i18next.t("Repository enabled successfully. Please reload the page.")
         );
         setTimeout(function () {
           switchMessage.classList.add("hidden");
@@ -181,7 +189,10 @@ function sendEnableDisableRequest(checked, repo) {
           switchMessage,
           "negative",
           "cancel",
-          `Failed to update repository (status ${response.status}). Please try again later.`
+          i18next.t(
+            "Failed to update repository (status {{status}}). Please try again later.",
+            { status: response.status }
+          )
         );
         setTimeout(function () {
           switchMessage.classList.add("hidden");
@@ -192,7 +203,7 @@ function sendEnableDisableRequest(checked, repo) {
         switchMessage,
         "negative",
         "cancel",
-        `There has been a problem: ${error}`
+        i18next.t("There has been a problem: {{error}}", { error })
       );
       setTimeout(function () {
         switchMessage.classList.add("hidden");
