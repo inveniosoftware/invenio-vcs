@@ -1,0 +1,8 @@
+{
+  "Repository sync started in the background. Please reload the page in about a minute.": "Synkronisering av repositoriet har startats i bakgrunden. Ladda om sidan om ungefär en minut.",
+  "The repository sync failed (status {{status}}). Please try again later.": "Synkroniseringen av repositoriet misslyckades (status {{status}}). Försök igen senare.",
+  "This action seems to take some time, refresh the page after several minutes to inspect the synchronisation.": "Den här åtgärden verkar ta lite tid. Uppdatera sidan efter några minuter för att kontrollera synkroniseringen.",
+  "There has been a problem: {{error}}": "Ett problem har uppstått: {{error}}",
+  "Repository enabled successfully. Please reload the page.": "Repositoriet har aktiverats. Ladda om sidan.",
+  "Failed to update repository (status {{status}}). Please try again later.": "Det gick inte att uppdatera repositoriet (status {{status}}). Försök igen senare."
+}

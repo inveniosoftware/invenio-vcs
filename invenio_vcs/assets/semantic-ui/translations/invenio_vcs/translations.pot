@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2026-06-25T15:45:14.660Z\n"
+"PO-Revision-Date: 2026-06-25T15:45:14.661Z\n"
+"Language: en\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about "
+"a minute."
+msgstr ""
+"Repository sync started in the background. Please reload the page in about "
+"a minute."
+
+msgid "The repository sync failed (status {{status}}). Please try again later."
+msgstr "The repository sync failed (status {{status}}). Please try again later."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+
+msgid "There has been a problem: {{error}}"
+msgstr "There has been a problem: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "Repository enabled successfully. Please reload the page."
+
+msgid "Failed to update repository (status {{status}}). Please try again later."
+msgstr "Failed to update repository (status {{status}}). Please try again later."
