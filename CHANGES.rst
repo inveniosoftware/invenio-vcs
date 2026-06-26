@@ -1,10 +1,17 @@
 ..
     SPDX-FileCopyrightText: 2016-2026 CERN.
     SPDX-FileCopyrightText: 2024-2026 Graz University of Technology.
+    SPDX-FileCopyrightText: 2026 KTH Royal Institute of Technology.
     SPDX-License-Identifier: MIT
 
 Changes
 =======
+
+Version v0.3.1 (released 2026-06-26)
+
+- I18n add support for JS translations
+- chore(git-blame): ignore the SPDX license header commit
+- chore(licenses): update license headers to use SPDX
 
 Version v0.3.0 (released 2026-06-05)
 
