@@ -13,9 +13,11 @@ on:
   push:
     branches:
       - master
+      - maint-**
   pull_request:
     branches:
       - master
+      - maint-**
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 3 * * 6"
