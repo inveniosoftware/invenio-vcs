@@ -1,10 +1,7 @@
 {
   "name": "invenio-vcs-ui",
   "config": {
-    "languages": [
-      "en",
-      "sv"
-    ]
+    "languages": ["en"]
   },
   "devDependencies": {
     "eslint": "^8.57.1",
