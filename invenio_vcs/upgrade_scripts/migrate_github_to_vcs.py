@@ -10,6 +10,7 @@ import sqlalchemy as sa
 from alembic.runtime.migration import MigrationContext
 from click import progressbar, secho
 from invenio_db import db
+from invenio_db.shared import UTCDateTime
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy_utils import JSONType, UUIDType
@@ -74,7 +75,6 @@ github_releases_table = sa.table(
     ),
     sa.Column("event_id", UUIDType, sa.ForeignKey("webhooks_events.id"), nullable=True),
     sa.Column("record_id", UUIDType, nullable=True),
-    sa.Column("record_is_draft", sa.Boolean(), nullable=True),
     sa.Column("status", sa.CHAR(1), nullable=False),
     sa.Column("created", sa.DateTime, nullable=False),
     sa.Column("updated", sa.DateTime, nullable=False),
@@ -105,10 +105,45 @@ vcs_releases_table = sa.table(
         "event_id", UUIDType, sa.ForeignKey("webhooks_events.id"), nullable=False
     ),
     sa.Column("record_id", UUIDType, nullable=True),
+    sa.Column("record_is_draft", sa.Boolean(), nullable=True),
     sa.Column("status", sa.CHAR(1), nullable=False),
     sa.Column("created", sa.DateTime, nullable=False),
     sa.Column("updated", sa.DateTime, nullable=False),
 )
+vcs_repository_users_table = sa.table(
+    "vcs_repository_users",
+    sa.Column(
+        "repository_id",
+        UUIDType,
+        sa.ForeignKey("vcs_repositories.id"),
+        primary_key=True,
+    ),
+    sa.Column(
+        "user_id", sa.Integer, sa.ForeignKey("accounts_user.id"), primary_key=True
+    ),
+    sa.Column("created", UTCDateTime, nullable=False),
+    sa.Column("updated", UTCDateTime, nullable=False),
+)
+
+
+def give_repo_access_if_not_exists(repo_id, user_id: int):
+    """
+    Add a record to give this user access to the repo.
+
+    If the access already exists, nothing happens.
+    """
+    try:
+        with db.session.begin_nested():
+            db.session.execute(
+                vcs_repository_users_table.insert().values(
+                    repository_id=repo_id,
+                    user_id=user_id,
+                    created=datetime.now(tz=timezone.utc),
+                    updated=datetime.now(tz=timezone.utc),
+                )
+            )
+    except sa.exc.IntegrityError:
+        pass
 
 
 def run_upgrade_for_oauthclient_repositories():
@@ -148,9 +183,10 @@ def run_upgrade_for_oauthclient_repositories():
                     # We are now storing _all_ repositories (even non-enabled ones) in the DB.
                     # The repo-user association will be created on the first sync after this migration, we need to download
                     # the list of users with access to the repo from the GitHub API.
+                    new_repo_id = uuid.uuid4()
                     db.session.execute(
                         vcs_repositories_table.insert().values(
-                            id=uuid.uuid4(),
+                            id=new_repo_id,
                             provider_id=id,
                             provider="github",
                             description=github_repo["description"],
@@ -165,6 +201,10 @@ def run_upgrade_for_oauthclient_repositories():
                             updated=datetime.now(tz=timezone.utc),
                         )
                     )
+
+                    give_repo_access_if_not_exists(
+                        new_repo_id, remote_account["user_id"]
+                    )
                 else:
                     db.session.execute(
                         vcs_repositories_table.update()
@@ -175,6 +215,11 @@ def run_upgrade_for_oauthclient_repositories():
                             default_branch=github_repo["default_branch"],
                             updated=datetime.now(tz=timezone.utc),
                         )
+                    )
+
+                    # Add a record to give this user access to the repo
+                    give_repo_access_if_not_exists(
+                        matching_db_repo_id, remote_account["user_id"]
                     )
 
             # Remove `repos` from the existing `extra_data`, leaving only the last sync timestamp
@@ -207,6 +252,7 @@ def run_upgrade_for_existing_db_repositories():
                     vcs_repositories_table.c.id,
                 ).filter_by(provider_id=str(old_db_repo["github_id"]))
             )
+            enabled_by_user_id = old_db_repo["user_id"]
 
             if matching_new_repo_id is None:
                 # We only have very limited metadata available at this point.
@@ -219,7 +265,7 @@ def run_upgrade_for_existing_db_repositories():
                         name=old_db_repo["name"],
                         default_branch="main",
                         hook=old_db_repo["hook"],
-                        enabled_by_user_id=old_db_repo["user_id"],
+                        enabled_by_user_id=enabled_by_user_id,
                         created=old_db_repo["created"],
                         updated=datetime.now(tz=timezone.utc),
                     )
@@ -235,6 +281,9 @@ def run_upgrade_for_existing_db_repositories():
                         created=old_db_repo["created"],
                     )
                 )
+
+            if enabled_by_user_id is not None:
+                give_repo_access_if_not_exists(old_db_repo["id"], enabled_by_user_id)
 
     db.session.commit()
 
