@@ -25,6 +25,8 @@ Quick start
 
   .. code-block:: python
 
+    from invenio_vcs.contrib.github import GitHubProviderFactory
+
     _vcs_github = GitHubProviderFactory(
         base_url="https://github.com",
         webhook_receiver_url="https://example.com/api/hooks/receivers/github/events/?access_token={token}",
@@ -36,13 +38,13 @@ Quick start
    but not to log in to the instance.
    You can also customize other settings of the OAuth client.
 
-    .. code-block:: python
+  .. code-block:: python
 
     vcs_github_oauth_remote_config = vcs_gitlab.oauth_remote_config
     vcs_github_oauth_remote_config["link_only"] = True
 
 
-2. Configure the OAuth client. Each provider provides its own configuration for ``invenio-oauthclient`` through which users can authenticate to get the necessary access token for syncing their repositories.
+3. Configure the OAuth client. Each provider provides its own configuration for ``invenio-oauthclient`` through which users can authenticate to get the necessary access token for syncing their repositories.
    This should be added to any OAuth clients you may already have configured:
 
   .. code-block:: python
@@ -57,7 +59,7 @@ Quick start
 
   If you used a custom ``id`` when constructing the provider factory, this ID must correspond to that. The default ID for the GitHub provider is ``github``.
 
-3. Register an OAuth application with the provider. For GitHub, this can be done through the `Developer Settings <https://github.com/settings/applications/new>`_. Please refer to the provider documentation for more details.
+4. Register an OAuth application with the provider. For GitHub, this can be done through the `Developer Settings <https://github.com/settings/applications/new>`_. Please refer to the provider documentation for more details.
 
   Usually, you'll be asked for a redirect URL. By default, this will be of the form:
 
@@ -80,7 +82,7 @@ Quick start
 
     The name of this config variable is specified by the ``credentials_key`` constructor argument of the provider factory. The '``GITHUB_``' is *not* derived from the ID, so you'll need to manually override this argument if you're using multiple instances of the same provider.
 
-4. Register the provider. By adding provider factories to this list, you can enable each of them as a repository syncing method.
+5. Register the provider. By adding provider factories to this list, you can enable each of them as a repository syncing method.
 
   .. code-block:: python
 
