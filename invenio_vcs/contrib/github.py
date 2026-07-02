@@ -369,7 +369,7 @@ class GitHubProvider(RepositoryServiceProvider):
 
         return None
 
-    def list_repository_contributors(self, repository_id, max):
+    def list_repository_contributors(self, repository_id, max=None):
         """List and sort (by contribution count) the contributors of a repo."""
         assert repository_id.isdigit()
 

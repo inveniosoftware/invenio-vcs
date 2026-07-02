@@ -312,7 +312,7 @@ class GitLabProvider(RepositoryServiceProvider):
 
     @_gitlab_response_error_handler
     def list_repository_contributors(
-        self, repository_id: str, max: int
+        self, repository_id: str, max: int | None = None
     ) -> list[GenericContributor] | None:
         """Get and enrich the contributor list as much as possible with the limited data returned by the API."""
         assert repository_id.isdigit()

@@ -366,7 +366,7 @@ class RepositoryServiceProvider(ABC):
 
     @abstractmethod
     def list_repository_contributors(
-        self, repository_id: str, max: int
+        self, repository_id: str, max: int | None = None
     ) -> list[GenericContributor] | None:
         """
         Returns the list of entities that have contributed to a given repository.
