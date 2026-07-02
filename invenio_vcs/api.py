@@ -104,6 +104,9 @@ class VCSRelease:
         :returns: a generator of objects that contains contributors information.
         """
         max_contributors = current_app.config.get("VCS_MAX_CONTRIBUTORS_NUMBER", 30)
+        if max_contributors == 0:
+            max_contributors = None
+
         return self.provider.list_repository_contributors(
             self.db_repo.provider_id, max=max_contributors
         )
