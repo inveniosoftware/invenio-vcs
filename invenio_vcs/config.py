@@ -61,7 +61,11 @@ VCS_ERROR_HANDLERS = None
 """Definition of the way specific exceptions are handled."""
 
 VCS_MAX_CONTRIBUTORS_NUMBER = 30
-"""Max number of contributors of a release to be retrieved from vcs."""
+"""
+Max number of contributors of a release to be retrieved from vcs.
+
+Set this to 0 to allow an unlimited number of contributors.
+"""
 
 VCS_CITATION_FILE = None
 """Citation file name."""

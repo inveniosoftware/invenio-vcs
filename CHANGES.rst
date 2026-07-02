@@ -6,6 +6,14 @@
 Changes
 =======
 
+Version v0.5.0 (released 2026-07-02)
+
+- feat: allow removing the contributor limit
+- fix(ext): correct menu item ordering
+- feat(upgrade): add user permissions to upgrade script
+- docs: upgrade guide for GitHub -> VCS
+- feat(i18n): add support for JS translations
+
 Version v0.4.0 (released 2026-06-18)
 
 - chore(setup): bump dependencies
