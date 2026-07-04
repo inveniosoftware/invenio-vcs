@@ -3,6 +3,7 @@
 #
 # Some of the code in this file was taken from https://codebase.helmholtz.cloud/rodare/invenio-gitlab
 # and relicensed under MIT with permission from the authors.
+
 """Contrib provider implementation for GitLab."""
 
 from __future__ import annotations
