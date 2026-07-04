@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 CERN.
 # SPDX-License-Identifier: MIT
+
 """Contrib provider implementation for GitHub."""
 
 import json
