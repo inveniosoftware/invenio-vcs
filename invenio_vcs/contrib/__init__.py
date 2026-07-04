@@ -3,7 +3,7 @@
 
 """Various contrib provider implementations."""
 
-from .github import GitHubProviderFactory, GitHubProvider
+from .github import GitHubProvider, GitHubProviderFactory
 from .gitlab import GitLabProvider, GitLabProviderFactory
 
 __all__ = (
@@ -12,4 +12,3 @@ __all__ = (
     "GitLabProvider",
     "GitLabProviderFactory",
 )
-
