@@ -67,7 +67,9 @@ def create_ui_blueprint(app):
         template_folder="../templates",
         url_prefix="/account/settings/vcs/<provider>",
     )
-    with app.app_context():  # Todo: Temporary fix, it should be removed when inveniosoftware/invenio-theme#355 is merged
+    with (
+        app.app_context()
+    ):  # Todo: Temporary fix, it should be removed when inveniosoftware/invenio-theme#355 is merged
         register_ui_routes(blueprint)
     return blueprint
 
