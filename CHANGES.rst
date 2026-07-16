@@ -1,10 +1,18 @@
 ..
     SPDX-FileCopyrightText: 2016-2026 CERN.
     SPDX-FileCopyrightText: 2024-2026 Graz University of Technology.
+    SPDX-FileCopyrightText: 2026 TU Wien.
     SPDX-License-Identifier: MIT
 
 Changes
 =======
+
+Version v0.5.1 (released 2026-07-16)
+
+- chore(setup): migrate from setuptools to hatchling
+- chore(format): fix black and isort complaints
+- fix(structure): add missing contrib.__init__ file
+- chore(cleanup): remove outdated and unnecessary files
 
 Version v0.5.0 (released 2026-07-02)
 
