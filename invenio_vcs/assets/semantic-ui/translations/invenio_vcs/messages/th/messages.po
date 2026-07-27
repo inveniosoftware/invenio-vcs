@@ -1,0 +1,44 @@
+# Translators:
+# Suthep Yonphimai <tomztt@gmail.com>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Suthep Yonphimai <tomztt@gmail.com>, 2026\n"
+"Language-Team: Thai (https://app.transifex.com/inveniosoftware/teams/23537/th/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr ""
+"การซิงค์ repository เริ่มต้นในพื้นหลัง กรุณารีโหลดหน้าในอีกประมาณหนึ่งนาที"
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+"การซิงค์ repository ล้มเหลว (สถานะ {{status}}) กรุณาลองอีกครั้งในภายหลัง"
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+"การดำเนินการนี้ดูเหมือนจะใช้เวลาสักครู่ "
+"รีเฟรชหน้าหลังจากผ่านไปสองสามนาทีเพื่อตรวจสอบการซิงโครไนซ์"
+
+msgid "There has been a problem: {{error}}"
+msgstr "เกิดปัญหา: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "เปิดใช้งาน repository สำเร็จ กรุณารีโหลดหน้า"
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""
+"อัปเดต repository ล้มเหลว (สถานะ {{status}}) กรุณาลองอีกครั้งในภายหลัง"

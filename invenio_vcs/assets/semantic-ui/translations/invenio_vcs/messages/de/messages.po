@@ -1,0 +1,48 @@
+# Translators:
+# Sarah Wiechers, 2026
+# Adienne Karsten-Welker, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Adienne Karsten-Welker, 2026\n"
+"Language-Team: German (https://app.transifex.com/inveniosoftware/teams/23537/de/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr ""
+"Die Repository-Synchronisierung wurde im Hintergrund gestartet. Bitte laden "
+"Sie die Seite in etwa einer Minute neu."
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+"Die Repository-Synchronisierung ist fehlgeschlagen (Status {{status}}). "
+"Bitte versuchen Sie es später erneut."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+"Diese Vorgang kann einige Minuten dauern. Laden Sie die Seite nach einigen "
+"Minuten neu, um den Synchronisierungsstatus zu überprüfen."
+
+msgid "There has been a problem: {{error}}"
+msgstr "Es ist ein Problem aufgetreten: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "Repository erfolgreich aktiviert. Bitte laden Sie die Seite neu."
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""
+"Aktualisierung des Repositorys fehlgeschlagen (Status {{status}}). Bitte "
+"versuchen Sie es später erneut."

@@ -1,0 +1,48 @@
+# Translators:
+# Ondřej Ruml, 2026
+# Mirek Simek <miroslav.simek@gmail.com>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Mirek Simek <miroslav.simek@gmail.com>, 2026\n"
+"Language-Team: Czech (https://app.transifex.com/inveniosoftware/teams/23537/cs/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr ""
+"Synchronizace repozitáře byla spuštěna na pozadí. Obnovte prosím stránku po "
+"pár minutách."
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+"Synchronizace repozitáře selhala (stav {{status}}). Zkuste to prosím znovu "
+"později."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+"Zdá se, že tato akce chvíli potrvá; po několika minutách obnovte stránku a "
+"zkontrolujte synchronizaci."
+
+msgid "There has been a problem: {{error}}"
+msgstr "Došlo k problému: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "Repozitář byl úspěšně povolen. Načtěte prosím stránku znovu."
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""
+"Nepodařilo se aktualizovat repozitář (stav {{status}}). Zkuste to prosím "
+"znovu později."

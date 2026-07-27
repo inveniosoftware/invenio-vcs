@@ -1,0 +1,43 @@
+# Translators:
+# Salaheddine Ben Ali <salaheddine.benali@cnudst.tn>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Salaheddine Ben Ali <salaheddine.benali@cnudst.tn>, 2026\n"
+"Language-Team: Arabic (https://app.transifex.com/inveniosoftware/teams/23537/ar/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr " بدأت مزامنة المستودع. يُرجى إعادة تحميل الصفحة بعد حوالي دقيقة."
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+" فشلت مزامنة المستودع (الحالة: {{status}}). يُرجى المحاولة مرة أخرى لاحقًا."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+" يبدو أن هذه العملية تستغرق بعض الوقت. يُرجى تحديث الصفحة بعد بضع دقائق "
+"للتحقق من حالة المزامنة."
+
+msgid "There has been a problem: {{error}}"
+msgstr " حدثت مشكلة: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr " تم تفعيل المستودع بنجاح. يُرجى إعادة تحميل الصفحة."
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""
+" تعذّر تحديث المستودع (رمز الحالة: {{status}}). يُرجى إعادة المحاولة لاحقًا."

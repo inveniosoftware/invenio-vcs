@@ -1,0 +1,39 @@
+# Translators:
+# Minjae Kwon, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Minjae Kwon, 2026\n"
+"Language-Team: Korean (https://app.transifex.com/inveniosoftware/teams/23537/ko/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr "저장소 동기화가 백그라운드에서 시작되었습니다. 약 1분 후 페이지를 새로고침하십시오."
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr "저장소 동기화에 실패했습니다(상태 {{status}}). 나중에 다시 시도하십시오."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr "이 작업은 시간이 걸릴 수 있습니다. 몇 분 후 페이지를 새로고침하여 동기화 상태를 확인하십시오."
+
+msgid "There has been a problem: {{error}}"
+msgstr "문제가 발생했습니다: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "저장소를 활성화했습니다. 페이지를 새로고침하십시오."
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr "저장소를 업데이트하지 못했습니다(상태 {{status}}). 나중에 다시 시도하십시오."

@@ -5,8 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 # 
 # Translators:
-# Sam Arbid, 2026
-# Mattias Vesterlund, 2026
+# Minjae Kwon, 2026
 # 
 #, fuzzy
 msgid ""
@@ -15,66 +14,66 @@ msgstr ""
 "Report-Msgid-Bugs-To: info@inveniosoftware.org\n"
 "POT-Creation-Date: 2026-06-26 13:51+0000\n"
 "PO-Revision-Date: 2026-06-26 13:24+0000\n"
-"Last-Translator: Mattias Vesterlund, 2026\n"
-"Language-Team: Swedish (https://app.transifex.com/inveniosoftware/teams/23537/sv/)\n"
+"Last-Translator: Minjae Kwon, 2026\n"
+"Language-Team: Korean (https://app.transifex.com/inveniosoftware/teams/23537/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: sv\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: invenio_vcs/errors.py:17
 msgid "The user cannot access this repository"
-msgstr "Användaren kan inte komma åt detta repositorium"
+msgstr "사용자가 이 저장소에 접근할 수 없습니다"
 
 #: invenio_vcs/errors.py:31
 msgid "This repository is not enabled for webhooks."
-msgstr "Detta repositorium har inte aktiverat möjlighet till webhooks."
+msgstr "이 저장소는 웹훅이 활성화되어 있지 않습니다."
 
 #: invenio_vcs/errors.py:42
 msgid "The repository does not exist."
-msgstr "Repositoriet existerar inte."
+msgstr "저장소가 존재하지 않습니다."
 
 #: invenio_vcs/errors.py:53
 msgid "Invalid sender for event"
-msgstr "Ogiltig sändare för händelsen"
+msgstr "이벤트의 발신자가 잘못되었습니다"
 
 #: invenio_vcs/errors.py:65
 msgid "The release has already been received."
-msgstr "Releasen har redan mottagits."
+msgstr "릴리스가 이미 수신되었습니다."
 
 #: invenio_vcs/errors.py:90
 msgid "The OAuth session token was not found."
-msgstr "OAuth-sessionstoken hittades inte."
+msgstr "OAuth 세션 토큰을 찾을 수 없습니다."
 
 #: invenio_vcs/errors.py:101
 msgid "RemoteAccount not found for user"
-msgstr "RemoteAccount kan inte hittas för användaren"
+msgstr "사용자의 RemoteAccount를 찾을 수 없습니다"
 
 #: invenio_vcs/errors.py:112
 msgid "RemoteAccount extra data not set for user."
-msgstr "RemoteAccount extra data har inte angetts för användaren."
+msgstr "사용자의 RemoteAccount 추가 데이터가 설정되어 있지 않습니다."
 
 #: invenio_vcs/errors.py:123
 msgid "Release does not exist."
-msgstr "Releasen existerar inte."
+msgstr "릴리스가 존재하지 않습니다."
 
 #: invenio_vcs/errors.py:133
 msgid "Provider API returned an unexpected error."
-msgstr "Leverantörens API returnerade ett oväntat fel."
+msgstr "제공자 API가 예상치 못한 오류를 반환했습니다."
 
 #: invenio_vcs/errors.py:143
 msgid "Error fetching release zipball file."
-msgstr "Fel vid hämtning av zipball-filen för releasen."
+msgstr "릴리스 zipball 파일을 가져오는 중 오류가 발생했습니다."
 
 #: invenio_vcs/errors.py:153
 msgid "Provider did not return user profile information."
-msgstr "Leverantören returnerade ingen användarprofilinformation."
+msgstr "제공자가 사용자 프로필 정보를 반환하지 않았습니다."
 
 #: invenio_vcs/errors.py:167
 msgid "Multiple existing webhooks found."
-msgstr "Flera befintliga webhooks hittades."
+msgstr "기존 웹훅이 여러 개 발견되었습니다."
 
 #: invenio_vcs/ext.py:98
 #, python-format
@@ -85,10 +84,7 @@ msgstr "%(icon)s %(provider)s"
 msgid ""
 "The name of the locally configured provider to sync accounts for. If not "
 "specified, will use the first entry in the list of configured providers."
-msgstr ""
-"Namnet på den lokalt konfigurerade leverantör som konton ska synkroniseras "
-"för. Om inget anges används den första posten i listan över konfigurerade "
-"leverantörer."
+msgstr "계정을 동기화할 로컬 구성 제공자의 이름입니다. 지정하지 않으면 구성된 제공자 목록의 첫 항목을 사용합니다."
 
 #: invenio_vcs/jobs.py:39
 msgid ""
@@ -96,9 +92,8 @@ msgid ""
 "times will make it continue handling further accounts. The default value is "
 "1000. Specifying 0 removes the limit."
 msgstr ""
-"Det maximala antalet konton som ska synkroniseras i en körning. Om jobbet "
-"körs flera gånger fortsätter det att hantera ytterligare konton. "
-"Standardvärdet är 1000. Om 0 anges tas gränsen bort."
+"한 번 실행에서 동기화할 최대 계정 수입니다. 작업을 여러 번 실행하면 이후 계정을 계속 처리합니다. 기본값은 1000입니다. 0을 "
+"지정하면 제한이 없어집니다."
 
 #: invenio_vcs/jobs.py:50
 msgid ""
@@ -107,129 +102,118 @@ msgid ""
 "value is 30 days (2592000 seconds). Using 0 will cause all accounts to be "
 "considered."
 msgstr ""
-"Den minsta tid (i sekunder) som måste ha gått sedan den senaste "
-"synkroniseringen för att ett konto ska inkluderas i listan över konton som "
-"ska synkroniseras. Standardvärdet är 30 dagar (2592000 sekunder). Om 0 "
-"används kommer alla konton att beaktas."
+"계정이 동기화 대상 목록에 포함되려면 마지막 동기화 이후 경과해야 하는 최소 시간(초)입니다. 기본값은 30일(2592000초)입니다. "
+"0을 사용하면 모든 계정이 대상이 됩니다."
 
 #: invenio_vcs/jobs.py:71
 msgid "No VCS providers configured on the instance."
-msgstr "Inga VCS-leverantörer har konfigurerats på instansen."
+msgstr "인스턴스에 구성된 VCS 제공자가 없습니다."
 
 #: invenio_vcs/jobs.py:80
 #, python-format
 msgid "Provider with ID %(value)s not registered on instance."
-msgstr "Leverantör med ID %(value)s är inte registrerad på instansen."
+msgstr "ID가 %(value)s인 제공자가 인스턴스에 등록되어 있지 않습니다."
 
 #: invenio_vcs/jobs.py:88
 msgid "Refresh VCS accounts"
-msgstr "Uppdatera VCS-konton"
+msgstr "VCS 계정 새로 고침"
 
 #: invenio_vcs/jobs.py:89
 msgid "Refresh stale VCS accounts and re-sync their repository metadata"
-msgstr ""
-"Uppdatera inaktuella VCS-konton och synkronisera om deras "
-"repositoriemetadata"
+msgstr "오래된 VCS 계정을 새로 고치고 저장소 메타데이터를 다시 동기화합니다"
 
 #: invenio_vcs/providers.py:288
 msgid ""
 "Webhook data not found for user's token. Please disconnect and reconnect the"
 " account again."
-msgstr ""
-"Webhook-data hittades inte för användarens token. Koppla från och återanslut"
-" kontot igen."
+msgstr "사용자 토큰에 대한 웹훅 데이터를 찾을 수 없습니다. 계정 연결을 해제한 후 다시 연결하십시오."
 
 #: invenio_vcs/service.py:143
 msgid "Last sync data is not set for user (remote data)."
-msgstr "Senast synkad data inte angivet för användare (extern data)."
+msgstr "사용자의 마지막 동기화 데이터가 설정되어 있지 않습니다(원격 데이터)."
 
 #: invenio_vcs/service.py:374
 msgid "Remote account was not found for user."
-msgstr "Externt konto kunde inte hittas för användare."
+msgstr "사용자의 원격 계정을 찾을 수 없습니다."
 
 #: invenio_vcs/tasks.py:71
 msgid "Deleted hook from vcs repository."
-msgstr "Raderade hook från VCS-repositorium."
+msgstr "vcs 저장소에서 훅을 삭제했습니다."
 
 #: invenio_vcs/contrib/github.py:41
 msgid "Automatically archive your GitHub repositories"
-msgstr "Arkivera dina GitHub-repositorier automatiskt"
+msgstr "GitHub 저장소를 자동으로 보관"
 
 #: invenio_vcs/contrib/github.py:55
 msgid "repository"
-msgstr "repositorium"
+msgstr "저장소"
 
 #: invenio_vcs/contrib/github.py:56
 msgid "repositories"
-msgstr "repositorier"
+msgstr "저장소"
 
 #: invenio_vcs/contrib/github.py:59
 msgid ""
 "If your organization's repositories do not show up in the list, please "
 "ensure you have enabled third-party access."
-msgstr ""
-"Om din organisations repositorier inte visas i listan, kontrollera att du "
-"har aktiverat tredjepartsåtkomst."
+msgstr "조직의 저장소가 목록에 표시되지 않으면 서드파티 접근을 활성화했는지 확인하십시오."
 
 #: invenio_vcs/contrib/gitlab.py:67
 msgid "Automatically archive your GitLab projects"
-msgstr "Arkivera dina GitLab-projekt automatiskt"
+msgstr "GitLab 프로젝트를 자동으로 보관"
 
 #: invenio_vcs/contrib/gitlab.py:81
 msgid "project"
-msgstr "projekt"
+msgstr "프로젝트"
 
 #: invenio_vcs/contrib/gitlab.py:82
 msgid "projects"
-msgstr "projekt"
+msgstr "프로젝트"
 
 #: invenio_vcs/contrib/gitlab.py:87
 msgid ""
 "If your project does not show up in the list, please ensure you have at "
 "least the 'Maintainer' role on the project or its group."
 msgstr ""
-"Om ditt projekt inte visas i listan, kontrollera att du har minst rollen "
-"'Maintainer' för projektet eller dess grupp."
+"프로젝트가 목록에 표시되지 않으면 프로젝트 또는 그 그룹에서 최소한 'Maintainer' 역할을 가지고 있는지 확인하십시오."
 
 #: invenio_vcs/contrib/gitlab.py:418
 #, python-format
 msgid "Managed by %(app_name)s. Please do not edit."
-msgstr "Hanteras av %(app_name)s. Redigera inte."
+msgstr "%(app_name)s에서 관리합니다. 편집하지 마십시오."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:15
 msgid "Sync now"
-msgstr "Synkronisera nu"
+msgstr "지금 동기화"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:16
 msgid "Syncing"
-msgstr "Synkroniserar"
+msgstr "동기화 중"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:20
 #, python-brace-format
 msgid "(updated {})"
-msgstr "(uppdaterad {})"
+msgstr "(업데이트됨 {})"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:32
 msgid "Get started"
-msgstr "Kom igång"
+msgstr "시작하기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:38
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:89
 msgid "Flip the switch"
-msgstr "Tryck på knappen"
+msgstr "스위치 켜기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:41
 msgid ""
 "Select the repository you want to preserve, and toggle\n"
 "                  the switch below to turn on automatic preservation of your software."
-msgstr ""
-"Välj det repositorium du vill bevara och slå på\n"
-"                  knappen nedan för att aktivera automatiskt bevarande av din programvara."
+msgstr "보존할 저장소를 선택하고 아래 스위치를 전환하여 소프트웨어 자동 보존을 켜십시오."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:47
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:105
 msgid "Create a release"
-msgstr "Skapa en release"
+msgstr "릴리스 만들기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:51
 #, python-format
@@ -239,14 +223,13 @@ msgid ""
 "hidden=\"true\"></i></a>. %(site_name)s will automatically receive and "
 "process your release."
 msgstr ""
-"Gå till %(name)s och <a href=\"%(release_docs_link)s\" "
-"target=\"_blank\">skapa en release <i class=\"small icon external\" aria-"
-"hidden=\"true\"></i></a>. %(site_name)s kommer automatiskt att ta emot och "
-"behandla din release."
+"%(name)s(으)로 이동하여 <a href=\"%(release_docs_link)s\" target=\"_blank\">릴리스를 "
+"만드십시오 <i class=\"small icon external\" aria-hidden=\"true\"></i></a>. "
+"%(site_name)s이(가) 릴리스를 자동으로 수신하고 처리합니다."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:62
 msgid "Check the status"
-msgstr "Kontrollera statusen"
+msgstr "상태 확인"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:66
 #, python-format
@@ -254,23 +237,21 @@ msgid ""
 "Click on a %(repository_name)s to view the status of each release, including"
 " whether it was successful and if you need to take any additional steps."
 msgstr ""
-"Klicka på ett %(repository_name)s för att visa statusen för varje release, "
-"inklusive om den lyckades och om du behöver vidta några ytterligare "
-"åtgärder."
+"%(repository_name)s을(를) 클릭하면 각 릴리스의 상태(성공 여부, 추가 조치 필요 여부 포함)를 볼 수 있습니다."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:82
 #, python-format
 msgid "Enabled %(repository_name_plural)s"
-msgstr "Aktiverade %(repository_name_plural)s"
+msgstr "활성화된 %(repository_name_plural)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:105
 msgid "More info"
-msgstr "Mer information"
+msgstr "자세히 보기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:115
 #, python-format
 msgid "You have no %(repository_name_plural)s on %(name)s."
-msgstr "Du har inga %(repository_name_plural)s på %(name)s."
+msgstr "%(name)s에 %(repository_name_plural)s이(가) 없습니다."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:118
 #, python-format
@@ -278,8 +259,9 @@ msgid ""
 "Go to <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> and create your first or\n"
 "          click the Sync button to synchronize the latest changes from %(name)s."
 msgstr ""
-"Gå till <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> och skapa ditt första eller\n"
-"          klicka på knappen Synkronisera för att synkronisera de senaste ändringarna från %(name)s."
+"<a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon "
+"external\" aria-hidden=\"true\"></i></a>(으)로 이동하여 첫 항목을 만들거나 Sync 버튼을 클릭하여 "
+"%(name)s의 최신 변경 사항을 동기화하십시오."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:137
 #, python-format
@@ -288,165 +270,155 @@ msgstr "%(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:140
 msgid "Software preservation made simple!"
-msgstr "Bevara programvara på ett enkelt sätt!"
+msgstr "소프트웨어 보존을 간단하게."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:144
 #, python-format
 msgid "Connect your %(name)s account"
-msgstr "Anslut ditt %(name)s-konto"
+msgstr "%(name)s 계정 연결"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:147
 msgid "Connect"
-msgstr "Anslut"
+msgstr "연결"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:150
 #, python-format
 msgid ""
 "To get started, click \"Connect\" and we will get a list of your "
 "%(repository_name_plural)s from %(name)s."
-msgstr ""
-"För att komma igång, klicka på \"Anslut\" så hämtar vi en lista över dina "
-"%(repository_name_plural)s från %(name)s."
+msgstr "시작하려면 \"연결\"을 클릭하십시오. %(name)s에서 %(repository_name_plural)s 목록을 가져옵니다."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:15
 #, python-format
 msgid "View %(repository_name)s on %(name)s"
-msgstr "Visa %(repository_name)s på %(name)s"
+msgstr "%(name)s에서 %(repository_name)s 보기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:16
 #, python-format
 msgid "View %(repository_name)s on %(name)s:"
-msgstr "Visa %(repository_name)s på %(name)s:"
+msgstr "%(name)s에서 %(repository_name)s 보기:"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:13
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:153
 msgid "Received"
-msgstr "Tilldelats"
+msgstr "수신됨"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:17
 msgid "Processing"
-msgstr "Bearbetning"
+msgstr "처리 중"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:21
 msgid "Published"
-msgstr "Publicerad"
+msgstr "게시됨"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:25
 msgid "Failed"
-msgstr "Misslyckades"
+msgstr "실패"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:29
 msgid "Deleted"
-msgstr "Raderad"
+msgstr "삭제됨"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:33
 msgid "Pending review"
-msgstr "Väntar på granskning"
+msgstr "검토 대기 중"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:64
 #, python-format
 msgid "View release on %(name)s"
-msgstr "Visa release på %(name)s"
+msgstr "%(name)s에서 릴리스 보기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:93
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:120
 msgid "Citation File"
-msgstr "Citeringsfil"
+msgstr "인용 파일"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:98
 msgid "Payload"
-msgstr "Nyttolast"
+msgstr "페이로드"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:107
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:174
 msgid "Errors"
-msgstr "Fel"
+msgstr "오류"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:122
 msgid "Create CITATION.cff"
-msgstr "Skapa CITATION.cff"
+msgstr "CITATION.cff 만들기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:126
 msgid ""
 "files are plain text files with human-\n"
 "                        and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software."
 msgstr ""
-"filer är vanliga textfiler med citeringsinformation för programvara som är "
-"läsbar för både människor och maskiner. Kodutvecklare kan inkludera dem i "
-"sina repositorier för att låta andra veta hur de korrekt citerar deras "
-"programvara."
+"파일은 소프트웨어의 사람과 기계가 읽을 수 있는 인용 정보를 담은 일반 텍스트 파일입니다. 코드 개발자는 이를 저장소에 포함하여 다른 "
+"사람에게 소프트웨어를 올바르게 인용하는 방법을 알릴 수 있습니다."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:129
 msgid "An example of the CITATION.cff for this release can be found below:"
-msgstr "Ett exempel på CITATION.cff för denna release finns nedan:"
+msgstr "이 릴리스의 CITATION.cff 예시는 아래에서 확인할 수 있습니다:"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:152
 #, python-format
 msgid "%(name)s Payload"
-msgstr "%(name)s-nyttolast"
+msgstr "%(name)s 페이로드"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:16
 msgid "Disable"
-msgstr "Inaktivera"
+msgstr "비활성화"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:17
 msgid "Enable"
-msgstr "Aktivera"
+msgstr "활성화"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:15
 msgid "Header"
-msgstr "Sidhuvud"
+msgstr "헤더"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:24
 #, python-format
 msgid "Go back to all %(repository_name_plural)s"
-msgstr "Gå tillbaka till alla %(repository_name_plural)s"
+msgstr "모든 %(repository_name_plural)s(으)로 돌아가기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:59
 msgid "Releases"
-msgstr "Releaser"
+msgstr "릴리스"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:60
 msgid "Create release"
-msgstr "Skapa release"
+msgstr "릴리스 만들기"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:71
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:85
 msgid "Get started!"
-msgstr "Kom igång!"
+msgstr "시작하기."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:72
 #, python-format
 msgid "Go to %(name)s and make your first release."
-msgstr "Gå till %(name)s och skapa din första release."
+msgstr "%(name)s(으)로 이동하여 첫 릴리스를 만드십시오."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:92
 msgid ""
 "Toggle the switch below to turn on/off automatic preservation of your "
 "repository."
-msgstr ""
-"Slå på knappen nedan för att aktivera automatiskt bevarande av ditt "
-"repositorie."
+msgstr "아래 스위치를 전환하여 저장소 자동 보존을 켜거나 끄십시오."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:108
 #, python-brace-format
 msgid ""
 "Go to {} and create a release. {}\n"
 "                  will automatically receive and process your release."
-msgstr ""
-"Gå till {} och skapa en release. {}\n"
-"                  kommer automatiskt att ta emot och behandla din release."
+msgstr "{}(으)로 이동하여 릴리스를 만드십시오. {}이(가) 릴리스를 자동으로 수신하고 처리합니다."
 
 #: invenio_vcs/views/vcs.py:53
 msgid "Account must be connected to the VCS provider."
-msgstr "Kontot måste vara anslutet till VCS-leverantören."
+msgstr "계정이 VCS 제공자에 연결되어 있어야 합니다."
 
 #: invenio_vcs/views/vcs.py:193
 msgid "Failed to enable repository, hook creation not successful."
-msgstr ""
-"Det gick inte att aktivera repositoriet, skapandet av hook misslyckades."
+msgstr "저장소를 활성화하지 못했습니다. 훅 생성에 실패했습니다."
 
 #: invenio_vcs/views/vcs.py:216
 msgid "Failed to disable repository, hook removal not successful."
-msgstr ""
-"Det gick inte att deaktivera repositoriet, borttagande av hook misslyckades."
+msgstr "저장소를 비활성화하지 못했습니다. 훅 제거에 실패했습니다."
