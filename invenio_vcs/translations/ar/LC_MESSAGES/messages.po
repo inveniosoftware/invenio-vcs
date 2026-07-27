@@ -5,8 +5,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 # 
 # Translators:
-# Sam Arbid, 2026
-# Mattias Vesterlund, 2026
+# Bessem Aamira <bessemamira@gmail.com>, 2026
+# Salaheddine Ben Ali <salaheddine.benali@cnudst.tn>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -15,66 +15,66 @@ msgstr ""
 "Report-Msgid-Bugs-To: info@inveniosoftware.org\n"
 "POT-Creation-Date: 2026-06-26 13:51+0000\n"
 "PO-Revision-Date: 2026-06-26 13:24+0000\n"
-"Last-Translator: Mattias Vesterlund, 2026\n"
-"Language-Team: Swedish (https://app.transifex.com/inveniosoftware/teams/23537/sv/)\n"
+"Last-Translator: Salaheddine Ben Ali <salaheddine.benali@cnudst.tn>, 2026\n"
+"Language-Team: Arabic (https://app.transifex.com/inveniosoftware/teams/23537/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: sv\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: invenio_vcs/errors.py:17
 msgid "The user cannot access this repository"
-msgstr "Användaren kan inte komma åt detta repositorium"
+msgstr "لا يمكن للمستخدم الوصول إلى مستودع"
 
 #: invenio_vcs/errors.py:31
 msgid "This repository is not enabled for webhooks."
-msgstr "Detta repositorium har inte aktiverat möjlighet till webhooks."
+msgstr "هذا المستودع غير مخوّل لـ webhooks."
 
 #: invenio_vcs/errors.py:42
 msgid "The repository does not exist."
-msgstr "Repositoriet existerar inte."
+msgstr "المستودع غير موجود."
 
 #: invenio_vcs/errors.py:53
 msgid "Invalid sender for event"
-msgstr "Ogiltig sändare för händelsen"
+msgstr "  الجهة المرسلة للحدث غير معتمدة"
 
 #: invenio_vcs/errors.py:65
 msgid "The release has already been received."
-msgstr "Releasen har redan mottagits."
+msgstr "لقد تم استلام الإصدار بالفعل."
 
 #: invenio_vcs/errors.py:90
 msgid "The OAuth session token was not found."
-msgstr "OAuth-sessionstoken hittades inte."
+msgstr " لم يتم العثور على رمز جلسة OAuth."
 
 #: invenio_vcs/errors.py:101
 msgid "RemoteAccount not found for user"
-msgstr "RemoteAccount kan inte hittas för användaren"
+msgstr "لم يتم العثور RemoteAccount للمستخدم"
 
 #: invenio_vcs/errors.py:112
 msgid "RemoteAccount extra data not set for user."
-msgstr "RemoteAccount extra data har inte angetts för användaren."
+msgstr "لم يتم إعداد بيانات إضافية لـ RemoteAccount للمستخدم."
 
 #: invenio_vcs/errors.py:123
 msgid "Release does not exist."
-msgstr "Releasen existerar inte."
+msgstr "الإصدار غير موجود."
 
 #: invenio_vcs/errors.py:133
 msgid "Provider API returned an unexpected error."
-msgstr "Leverantörens API returnerade ett oväntat fel."
+msgstr " أعادت واجهة برمجة التطبيقات API الخاصة بمزود الخدمة خطأً غير متوقع."
 
 #: invenio_vcs/errors.py:143
 msgid "Error fetching release zipball file."
-msgstr "Fel vid hämtning av zipball-filen för releasen."
+msgstr " حدث خطأ أثناء جلب ملف ZIP الخاص بالإصدار."
 
 #: invenio_vcs/errors.py:153
 msgid "Provider did not return user profile information."
-msgstr "Leverantören returnerade ingen användarprofilinformation."
+msgstr " لم يقم مزود الخدمة بإرجاع معلومات الملف الشخصي للمستخدم."
 
 #: invenio_vcs/errors.py:167
 msgid "Multiple existing webhooks found."
-msgstr "Flera befintliga webhooks hittades."
+msgstr " تم العثور على عدة Webhooks موجودة بالفعل."
 
 #: invenio_vcs/ext.py:98
 #, python-format
@@ -86,9 +86,8 @@ msgid ""
 "The name of the locally configured provider to sync accounts for. If not "
 "specified, will use the first entry in the list of configured providers."
 msgstr ""
-"Namnet på den lokalt konfigurerade leverantör som konton ska synkroniseras "
-"för. Om inget anges används den första posten i listan över konfigurerade "
-"leverantörer."
+" اسم مزود الخدمة المُكوَّن محليًا الذي سيتم استخدامه لمزامنة الحسابات. إذا "
+"لم يتم تحديده، فسيتم استخدام أول مزود موجود في قائمة مزودي الخدمة المُعدّين."
 
 #: invenio_vcs/jobs.py:39
 msgid ""
@@ -96,9 +95,9 @@ msgid ""
 "times will make it continue handling further accounts. The default value is "
 "1000. Specifying 0 removes the limit."
 msgstr ""
-"Det maximala antalet konton som ska synkroniseras i en körning. Om jobbet "
-"körs flera gånger fortsätter det att hantera ytterligare konton. "
-"Standardvärdet är 1000. Om 0 anges tas gränsen bort."
+" الحد الأقصى لعدد الحسابات التي يمكن مزامنتها في عملية تشغيل واحدة. عند "
+"تشغيل المهمة عدة مرات، ستواصل معالجة الحسابات المتبقية. القيمة الافتراضية هي"
+" 1000 حساب. ويؤدي تحديد القيمة 0 إلى إزالة هذا الحد."
 
 #: invenio_vcs/jobs.py:50
 msgid ""
@@ -107,129 +106,129 @@ msgid ""
 "value is 30 days (2592000 seconds). Using 0 will cause all accounts to be "
 "considered."
 msgstr ""
-"Den minsta tid (i sekunder) som måste ha gått sedan den senaste "
-"synkroniseringen för att ett konto ska inkluderas i listan över konton som "
-"ska synkroniseras. Standardvärdet är 30 dagar (2592000 sekunder). Om 0 "
-"används kommer alla konton att beaktas."
+" الحد الأدنى للمدة الزمنية (بالثواني) التي يجب أن تكون قد انقضت منذ آخر "
+"مزامنة للحساب حتى يتم تضمينه ضمن قائمة الحسابات المراد مزامنتها. القيمة "
+"الافتراضية هي 30 يومًا (2592000 ثانية). يؤدي استخدام القيمة 0 إلى اعتبار "
+"جميع الحسابات مؤهلة للمزامنة."
 
 #: invenio_vcs/jobs.py:71
 msgid "No VCS providers configured on the instance."
-msgstr "Inga VCS-leverantörer har konfigurerats på instansen."
+msgstr " لم يتم إعداد أي مزود لخدمات التحكم في الإصدارات VCS على النظام."
 
 #: invenio_vcs/jobs.py:80
 #, python-format
 msgid "Provider with ID %(value)s not registered on instance."
-msgstr "Leverantör med ID %(value)s är inte registrerad på instansen."
+msgstr " مزود الخدمة ذو المعرّف المحدد %(value)s  غير مُسجَّل على هذا المثيل."
 
 #: invenio_vcs/jobs.py:88
 msgid "Refresh VCS accounts"
-msgstr "Uppdatera VCS-konton"
+msgstr " تحديث حسابات نظام التحكم في الإصدارات VCS"
 
 #: invenio_vcs/jobs.py:89
 msgid "Refresh stale VCS accounts and re-sync their repository metadata"
 msgstr ""
-"Uppdatera inaktuella VCS-konton och synkronisera om deras "
-"repositoriemetadata"
+" إعادة تحديث حسابات نظام التحكم في الإصدارات VCS غير المزامنة وإعادة مزامنة "
+"ميتاداتا مستودعاتها."
 
 #: invenio_vcs/providers.py:288
 msgid ""
 "Webhook data not found for user's token. Please disconnect and reconnect the"
 " account again."
 msgstr ""
-"Webhook-data hittades inte för användarens token. Koppla från och återanslut"
-" kontot igen."
+" م يتم العثور على بيانات الـ Webhook المرتبطة برمز المستخدم Token. يُرجى فصل"
+" الحساب ثم إعادة ربطه مرة أخرى."
 
 #: invenio_vcs/service.py:143
 msgid "Last sync data is not set for user (remote data)."
-msgstr "Senast synkad data inte angivet för användare (extern data)."
+msgstr "لم يتم تعيين آخر بيانات المزامنة للمستخدم (remote data)."
 
 #: invenio_vcs/service.py:374
 msgid "Remote account was not found for user."
-msgstr "Externt konto kunde inte hittas för användare."
+msgstr "  لم يتم العثور على حساب خارجي مرتبط بهذا المستخدم."
 
 #: invenio_vcs/tasks.py:71
 msgid "Deleted hook from vcs repository."
-msgstr "Raderade hook från VCS-repositorium."
+msgstr " تم حذف الـ Hook من مستودع نظام التحكم في الإصدارات VCS."
 
 #: invenio_vcs/contrib/github.py:41
 msgid "Automatically archive your GitHub repositories"
-msgstr "Arkivera dina GitHub-repositorier automatiskt"
+msgstr " قم بأرشفة مستودعات GitHub الخاصة بك بشكلٍ تلقائي."
 
 #: invenio_vcs/contrib/github.py:55
 msgid "repository"
-msgstr "repositorium"
+msgstr "مستودع"
 
 #: invenio_vcs/contrib/github.py:56
 msgid "repositories"
-msgstr "repositorier"
+msgstr "مستودعات"
 
 #: invenio_vcs/contrib/github.py:59
 msgid ""
 "If your organization's repositories do not show up in the list, please "
 "ensure you have enabled third-party access."
 msgstr ""
-"Om din organisations repositorier inte visas i listan, kontrollera att du "
-"har aktiverat tredjepartsåtkomst."
+" إذا لم تظهر مستودعات مؤسستك في القائمة، فيُرجى التأكد من أنك قمت بتمكين "
+"وصول الجهات الخارجية Third-party Access."
 
 #: invenio_vcs/contrib/gitlab.py:67
 msgid "Automatically archive your GitLab projects"
-msgstr "Arkivera dina GitLab-projekt automatiskt"
+msgstr " قم بأرشفة مشاريع GitLab الخاصة بك تلقائيًا."
 
 #: invenio_vcs/contrib/gitlab.py:81
 msgid "project"
-msgstr "projekt"
+msgstr "مشروع"
 
 #: invenio_vcs/contrib/gitlab.py:82
 msgid "projects"
-msgstr "projekt"
+msgstr "مشاريع"
 
 #: invenio_vcs/contrib/gitlab.py:87
 msgid ""
 "If your project does not show up in the list, please ensure you have at "
 "least the 'Maintainer' role on the project or its group."
 msgstr ""
-"Om ditt projekt inte visas i listan, kontrollera att du har minst rollen "
-"'Maintainer' för projektet eller dess grupp."
+" إذا لم يظهر مشروعك في القائمة، فيُرجى التأكد من أنك تمتلك على الأقل دور "
+"'المشرف' في المشروع أو في المجموعة التابعة له."
 
 #: invenio_vcs/contrib/gitlab.py:418
 #, python-format
 msgid "Managed by %(app_name)s. Please do not edit."
-msgstr "Hanteras av %(app_name)s. Redigera inte."
+msgstr " تتم إدارته بواسطة %(app_name)s . يُرجى عدم إجراء أي تعديلات."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:15
 msgid "Sync now"
-msgstr "Synkronisera nu"
+msgstr "زامِن الآن"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:16
 msgid "Syncing"
-msgstr "Synkroniserar"
+msgstr "جاري التّزامن"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:20
 #, python-brace-format
 msgid "(updated {})"
-msgstr "(uppdaterad {})"
+msgstr "(تمّ التحيين {})"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:32
 msgid "Get started"
-msgstr "Kom igång"
+msgstr "إبدأ الآن"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:38
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:89
 msgid "Flip the switch"
-msgstr "Tryck på knappen"
+msgstr "غيّر الإختيار"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:41
 msgid ""
 "Select the repository you want to preserve, and toggle\n"
 "                  the switch below to turn on automatic preservation of your software."
 msgstr ""
-"Välj det repositorium du vill bevara och slå på\n"
-"                  knappen nedan för att aktivera automatiskt bevarande av din programvara."
+" ختر المستودع الذي ترغب في الحفاظ عليه، ثم فعّل\n"
+"   المفتاح أدناه لتمكين الحفظ التلقائي لبرامجك."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:47
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:105
 msgid "Create a release"
-msgstr "Skapa en release"
+msgstr "أنشأ إصدارا"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:51
 #, python-format
@@ -239,14 +238,14 @@ msgid ""
 "hidden=\"true\"></i></a>. %(site_name)s will automatically receive and "
 "process your release."
 msgstr ""
-"Gå till %(name)s och <a href=\"%(release_docs_link)s\" "
-"target=\"_blank\">skapa en release <i class=\"small icon external\" aria-"
-"hidden=\"true\"></i></a>. %(site_name)s kommer automatiskt att ta emot och "
-"behandla din release."
+" اذهب إلى %(name)s و <a href=\"%(release_docs_link)s\" target=\"_blank\"> "
+"أنشئ إصدارًا جديدًا<i class=\"small icon external\" aria-"
+"hidden=\"true\"></i></a>. %(site_name)s  سيتم تلقائيًا استلام إصدارك "
+"ومعالجته."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:62
 msgid "Check the status"
-msgstr "Kontrollera statusen"
+msgstr " التحقق من الحالة"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:66
 #, python-format
@@ -254,23 +253,22 @@ msgid ""
 "Click on a %(repository_name)s to view the status of each release, including"
 " whether it was successful and if you need to take any additional steps."
 msgstr ""
-"Klicka på ett %(repository_name)s för att visa statusen för varje release, "
-"inklusive om den lyckades och om du behöver vidta några ytterligare "
-"åtgärder."
+" انقر على %(repository_name)s لعرض حالة كل إصدار،  ومعرفة ما إذا كانت عملية "
+"الإصدار ناجحة، وما إذا كانت هناك إجراءات إضافية مطلوبة منك."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:82
 #, python-format
 msgid "Enabled %(repository_name_plural)s"
-msgstr "Aktiverade %(repository_name_plural)s"
+msgstr "مفعّل %(repository_name_plural)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:105
 msgid "More info"
-msgstr "Mer information"
+msgstr "المزيد من المعلومات"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:115
 #, python-format
 msgid "You have no %(repository_name_plural)s on %(name)s."
-msgstr "Du har inga %(repository_name_plural)s på %(name)s."
+msgstr " ليس لديك %(repository_name_plural)s على %(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:118
 #, python-format
@@ -278,8 +276,8 @@ msgid ""
 "Go to <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> and create your first or\n"
 "          click the Sync button to synchronize the latest changes from %(name)s."
 msgstr ""
-"Gå till <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> och skapa ditt första eller\n"
-"          klicka på knappen Synkronisera för att synkronisera de senaste ändringarna från %(name)s."
+" اذهب إلى <a href=\"%(url)s\" target=\"_blank\">%(name)s<i class=\"small icon external\" aria-hidden=\"true\"></i></a> وأنشئ أول واحد لك أو\n"
+" اضغط على زر Sync-button لمزامنة حدث التغييرات من %(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:137
 #, python-format
@@ -288,16 +286,16 @@ msgstr "%(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:140
 msgid "Software preservation made simple!"
-msgstr "Bevara programvara på ett enkelt sätt!"
+msgstr "وقع تبسيط المحفاظة على البرمجيّات!"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:144
 #, python-format
 msgid "Connect your %(name)s account"
-msgstr "Anslut ditt %(name)s-konto"
+msgstr "  قم بربط %(name)s الحساب الخاص بك"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:147
 msgid "Connect"
-msgstr "Anslut"
+msgstr "قم بالتوصيل"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:150
 #, python-format
@@ -305,128 +303,124 @@ msgid ""
 "To get started, click \"Connect\" and we will get a list of your "
 "%(repository_name_plural)s from %(name)s."
 msgstr ""
-"För att komma igång, klicka på \"Anslut\" så hämtar vi en lista över dina "
-"%(repository_name_plural)s från %(name)s."
+"للبدء، أنقر على\"إتصال\" وستحصل على قائمة %(repository_name_plural)s من "
+"%(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:15
 #, python-format
 msgid "View %(repository_name)s on %(name)s"
-msgstr "Visa %(repository_name)s på %(name)s"
+msgstr " عرض %(repository_name)s على %(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:16
 #, python-format
 msgid "View %(repository_name)s on %(name)s:"
-msgstr "Visa %(repository_name)s på %(name)s:"
+msgstr " عرض %(repository_name)s على %(name)s:"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:13
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:153
 msgid "Received"
-msgstr "Tilldelats"
+msgstr "تم الاستلام"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:17
 msgid "Processing"
-msgstr "Bearbetning"
+msgstr "بصدد المعالجة"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:21
 msgid "Published"
-msgstr "Publicerad"
+msgstr "نشرت"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:25
 msgid "Failed"
-msgstr "Misslyckades"
+msgstr "فشلت"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:29
 msgid "Deleted"
-msgstr "Raderad"
+msgstr "تمّ الحذف"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:33
 msgid "Pending review"
-msgstr "Väntar på granskning"
+msgstr " بانتظار المراجعة"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:64
 #, python-format
 msgid "View release on %(name)s"
-msgstr "Visa release på %(name)s"
+msgstr " عرض الإصدار على %(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:93
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:120
 msgid "Citation File"
-msgstr "Citeringsfil"
+msgstr "ملف إستشهاد"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:98
 msgid "Payload"
-msgstr "Nyttolast"
+msgstr "Payload"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:107
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:174
 msgid "Errors"
-msgstr "Fel"
+msgstr "أخطاء"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:122
 msgid "Create CITATION.cff"
-msgstr "Skapa CITATION.cff"
+msgstr "أنشأ ملف CITATION.cff"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:126
 msgid ""
 "files are plain text files with human-\n"
 "                        and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software."
 msgstr ""
-"filer är vanliga textfiler med citeringsinformation för programvara som är "
-"läsbar för både människor och maskiner. Kodutvecklare kan inkludera dem i "
-"sina repositorier för att låta andra veta hur de korrekt citerar deras "
-"programvara."
+" الملفات ملفات نصية مقروءة من قبل البشر\n"
+" والآلة تحتوي على معلومات الاستشهاد بالبرمجيات.  ويستطيع مطورو البرمجيات إضافتها إلى مستودعاتهم لتوضيح الطريقة الصحيحة التي ينبغي اتباعها عند الاستشهاد ببرامجهم."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:129
 msgid "An example of the CITATION.cff for this release can be found below:"
-msgstr "Ett exempel på CITATION.cff för denna release finns nedan:"
+msgstr "يمكن الإطلاع على مثال لـ CITATION.cff لهذا الإصدار أدناه:"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:152
 #, python-format
 msgid "%(name)s Payload"
-msgstr "%(name)s-nyttolast"
+msgstr "%(name)s محتوى الطلب"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:16
 msgid "Disable"
-msgstr "Inaktivera"
+msgstr "إبطال"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:17
 msgid "Enable"
-msgstr "Aktivera"
+msgstr "تفعيل"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:15
 msgid "Header"
-msgstr "Sidhuvud"
+msgstr "ترويسة"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:24
 #, python-format
 msgid "Go back to all %(repository_name_plural)s"
-msgstr "Gå tillbaka till alla %(repository_name_plural)s"
+msgstr "عودة إلى كل %(repository_name_plural)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:59
 msgid "Releases"
-msgstr "Releaser"
+msgstr "إصدارات"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:60
 msgid "Create release"
-msgstr "Skapa release"
+msgstr "أنشأ إصدارا"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:71
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:85
 msgid "Get started!"
-msgstr "Kom igång!"
+msgstr "لتبدأ الآن!"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:72
 #, python-format
 msgid "Go to %(name)s and make your first release."
-msgstr "Gå till %(name)s och skapa din första release."
+msgstr "إذهب إلى %(name)s و أنشأ إصدارك الأوّل. "
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:92
 msgid ""
 "Toggle the switch below to turn on/off automatic preservation of your "
 "repository."
-msgstr ""
-"Slå på knappen nedan för att aktivera automatiskt bevarande av ditt "
-"repositorie."
+msgstr "قم بتبديل المفتاح أدناه لـ تشغيل/إيقاف الحفظ التلقائي لمستودعك."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:108
 #, python-brace-format
@@ -434,19 +428,17 @@ msgid ""
 "Go to {} and create a release. {}\n"
 "                  will automatically receive and process your release."
 msgstr ""
-"Gå till {} och skapa en release. {}\n"
-"                  kommer automatiskt att ta emot och behandla din release."
+" اذهب إلى {} وأنشئ إصدارًا. {}\n"
+"  سيتم تلقائيًا استلام إصدارك ومعالجته."
 
 #: invenio_vcs/views/vcs.py:53
 msgid "Account must be connected to the VCS provider."
-msgstr "Kontot måste vara anslutet till VCS-leverantören."
+msgstr " الحساب يجب أن يوضل بمزوّد نظام إدارة الإصدارات VCS."
 
 #: invenio_vcs/views/vcs.py:193
 msgid "Failed to enable repository, hook creation not successful."
-msgstr ""
-"Det gick inte att aktivera repositoriet, skapandet av hook misslyckades."
+msgstr "فشل في تمكين المستودع، لم يتم إنشاء الخطاف بنجاح."
 
 #: invenio_vcs/views/vcs.py:216
 msgid "Failed to disable repository, hook removal not successful."
-msgstr ""
-"Det gick inte att deaktivera repositoriet, borttagande av hook misslyckades."
+msgstr "فشل في تعطيل المستودع، لم يتم إنشاء الخطاف بنجاح."

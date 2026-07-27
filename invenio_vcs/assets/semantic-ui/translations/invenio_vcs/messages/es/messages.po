@@ -1,0 +1,36 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Language-Team: Spanish (https://app.transifex.com/inveniosoftware/teams/23537/es/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr ""
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+
+msgid "There has been a problem: {{error}}"
+msgstr ""
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr ""
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""

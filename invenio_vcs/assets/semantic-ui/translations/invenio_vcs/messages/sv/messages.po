@@ -1,0 +1,48 @@
+# Translators:
+# Sam Arbid, 2026
+# Mattias Vesterlund, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
+"PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Mattias Vesterlund, 2026\n"
+"Language-Team: Swedish (https://app.transifex.com/inveniosoftware/teams/23537/sv/)\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"mime-version: 1.0\n"
+
+msgid ""
+"Repository sync started in the background. Please reload the page in about a"
+" minute."
+msgstr ""
+"Synkronisering av repositoriet startade i bakgrunden. Ladda om sidan om "
+"ungefär en minut."
+
+msgid ""
+"The repository sync failed (status {{status}}). Please try again later."
+msgstr ""
+"Synkroniseringen av repositoriet misslyckades (status {{status}}). Försök "
+"igen senare."
+
+msgid ""
+"This action seems to take some time, refresh the page after several minutes "
+"to inspect the synchronisation."
+msgstr ""
+"Den här åtgärden verkar ta lite tid. Uppdatera sidan efter några minuter för"
+" att kontrollera synkroniseringen."
+
+msgid "There has been a problem: {{error}}"
+msgstr "Ett problem har uppstått: {{error}}"
+
+msgid "Repository enabled successfully. Please reload the page."
+msgstr "Repositoriet aktiverades. Ladda om sidan."
+
+msgid ""
+"Failed to update repository (status {{status}}). Please try again later."
+msgstr ""
+"Det gick inte att uppdatera repositoriet (status {{status}}). Försök igen "
+"senare."
