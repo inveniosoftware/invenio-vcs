@@ -7,6 +7,10 @@
 Changes
 =======
 
+Version v0.3.2 (released 2026-07-28)
+
+- i18n: pulled translations
+
 Version v0.3.1 (released 2026-06-26)
 
 - I18n add support for JS translations
