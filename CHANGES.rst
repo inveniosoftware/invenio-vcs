@@ -8,6 +8,11 @@
 Changes
 =======
 
+Version v0.3.4 (released 2026-08-06)
+
+- fix(ci): update python workflow ref
+- feat(upgrade): add user permissions to upgrade script
+- docs: upgrade guide for GitHub -> VCS
 
 Version v0.3.3 (released 2026-07-28)
 
