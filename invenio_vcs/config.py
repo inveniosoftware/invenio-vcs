@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2025 CERN.
+# SPDX-FileCopyrightText: 2026 KTH Royal Institute of Technology.
 # SPDX-License-Identifier: MIT
 
 """You can use these options to configure the Invenio-VCS module.
@@ -39,7 +40,7 @@ This makes it possible to specify configuration values via environment variables
 class constructor parameters, allowing for easier secret setting.
 """
 
-VCS_RELEASE_CLASS = "invenio_vcs.service:VCSRelease"
+VCS_RELEASE_CLASS = "invenio_vcs.api:VCSRelease"
 """VCSRelease class to be used for release handling."""
 
 VCS_TEMPLATE_INDEX = "invenio_vcs/settings/index.html"
