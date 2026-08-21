@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v0.3.5 (released 2026-08-21)
+
+- i18n: pulled translations
+
 Version v0.3.4 (released 2026-08-06)
 
 - fix(ci): update python workflow ref
