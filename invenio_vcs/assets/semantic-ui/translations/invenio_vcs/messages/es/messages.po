@@ -1,9 +1,12 @@
+# Translators:
+# Jesús Martín <jesusmartin@sallep.net>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-06-26T13:51:19.356Z\n"
 "PO-Revision-Date: 2026-06-26 13:24+0000\n"
+"Last-Translator: Jesús Martín <jesusmartin@sallep.net>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/inveniosoftware/teams/23537/es/)\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,22 +18,30 @@ msgid ""
 "Repository sync started in the background. Please reload the page in about a"
 " minute."
 msgstr ""
+"La sincronización del repositorio se ha iniciado en segundo plano. Vuelva a "
+"cargar la página en aproximadamente un minuto."
 
 msgid ""
 "The repository sync failed (status {{status}}). Please try again later."
 msgstr ""
+"La sincronización del repositorio falló (estado {{status}}). Inténtelo de "
+"nuevo más tarde."
 
 msgid ""
 "This action seems to take some time, refresh the page after several minutes "
 "to inspect the synchronisation."
 msgstr ""
+"Esta acción parece tardar un tiempo; actualice la página después de unos "
+"minutos para comprobar la sincronización."
 
 msgid "There has been a problem: {{error}}"
-msgstr ""
+msgstr "Ha habido un problema: {{error}}"
 
 msgid "Repository enabled successfully. Please reload the page."
-msgstr ""
+msgstr "Repositorio habilitado correctamente. Por favor, recargue la página."
 
 msgid ""
 "Failed to update repository (status {{status}}). Please try again later."
 msgstr ""
+"No se pudo actualizar el repositorio (estado {{status}}). Inténtelo de nuevo"
+" más tarde."
