@@ -26,7 +26,7 @@ msgstr ""
 
 #: invenio_vcs/errors.py:17
 msgid "The user cannot access this repository"
-msgstr ""
+msgstr "El usuario no puede acceder a este repositorio."
 
 #: invenio_vcs/errors.py:31
 msgid "This repository is not enabled for webhooks."
@@ -46,7 +46,7 @@ msgstr "El comunicado ya fue recibido."
 
 #: invenio_vcs/errors.py:90
 msgid "The OAuth session token was not found."
-msgstr ""
+msgstr "No se encontró el token de sesión de OAuth."
 
 #: invenio_vcs/errors.py:101
 msgid "RemoteAccount not found for user"
@@ -62,7 +62,7 @@ msgstr "El lanzamiento no existe."
 
 #: invenio_vcs/errors.py:133
 msgid "Provider API returned an unexpected error."
-msgstr ""
+msgstr "El proveedor de la API devolvió un error inesperado."
 
 #: invenio_vcs/errors.py:143
 msgid "Error fetching release zipball file."
@@ -70,22 +70,25 @@ msgstr "Error al obtener el archivo zipball de la versión."
 
 #: invenio_vcs/errors.py:153
 msgid "Provider did not return user profile information."
-msgstr ""
+msgstr "El proveedor no devolvió la información del perfil del usuario."
 
 #: invenio_vcs/errors.py:167
 msgid "Multiple existing webhooks found."
-msgstr ""
+msgstr "Se han encontrado varios webhooks existentes."
 
 #: invenio_vcs/ext.py:98
 #, python-format
 msgid "%(icon)s %(provider)s"
-msgstr ""
+msgstr "%(icon)s %(provider)s"
 
 #: invenio_vcs/jobs.py:28
 msgid ""
 "The name of the locally configured provider to sync accounts for. If not "
 "specified, will use the first entry in the list of configured providers."
 msgstr ""
+"Nombre del proveedor configurado localmente para sincronizar las cuentas. Si"
+" no se especifica, se utilizará la primera entrada de la lista de "
+"proveedores configurados."
 
 #: invenio_vcs/jobs.py:39
 msgid ""
@@ -93,6 +96,9 @@ msgid ""
 "times will make it continue handling further accounts. The default value is "
 "1000. Specifying 0 removes the limit."
 msgstr ""
+"Número máximo de cuentas a sincronizar en una sola ejecución. Si se ejecuta "
+"la tarea varias veces, seguirá procesando más cuentas. El valor "
+"predeterminado es 1000. Si se especifica 0, se elimina el límite."
 
 #: invenio_vcs/jobs.py:50
 msgid ""
@@ -101,29 +107,37 @@ msgid ""
 "value is 30 days (2592000 seconds). Using 0 will cause all accounts to be "
 "considered."
 msgstr ""
+"Tiempo mínimo (en segundos) transcurrido desde la última sincronización para"
+" que una cuenta se incluya en la lista de cuentas a sincronizar. El valor "
+"predeterminado es de 30 días (2.592.000 segundos). Si se introduce 0, se "
+"tendrán en cuenta todas las cuentas."
 
 #: invenio_vcs/jobs.py:71
 msgid "No VCS providers configured on the instance."
-msgstr ""
+msgstr "No hay proveedores de VCS configurados en la instancia."
 
 #: invenio_vcs/jobs.py:80
 #, python-format
 msgid "Provider with ID %(value)s not registered on instance."
-msgstr ""
+msgstr "Proveedor con ID %(value)s no registrado en la instancia."
 
 #: invenio_vcs/jobs.py:88
 msgid "Refresh VCS accounts"
-msgstr ""
+msgstr "Actualizar cuentas VCS"
 
 #: invenio_vcs/jobs.py:89
 msgid "Refresh stale VCS accounts and re-sync their repository metadata"
 msgstr ""
+"Actualiza las cuentas VCS obsoletas y vuelve a sincronizar los metadatos de "
+"su repositorio."
 
 #: invenio_vcs/providers.py:288
 msgid ""
 "Webhook data not found for user's token. Please disconnect and reconnect the"
 " account again."
 msgstr ""
+"No se encontraron datos de webhook para el token del usuario. Desconecte y "
+"vuelva a conectar la cuenta."
 
 #: invenio_vcs/service.py:143
 msgid "Last sync data is not set for user (remote data)."
@@ -137,48 +151,52 @@ msgstr "No se encontró la cuenta remota para el usuario."
 
 #: invenio_vcs/tasks.py:71
 msgid "Deleted hook from vcs repository."
-msgstr ""
+msgstr "Se eliminó el hook del repositorio vcs."
 
 #: invenio_vcs/contrib/github.py:41
 msgid "Automatically archive your GitHub repositories"
-msgstr ""
+msgstr "Archiva automáticamente tus repositorios de GitHub."
 
 #: invenio_vcs/contrib/github.py:55
 msgid "repository"
-msgstr ""
+msgstr "repositorio"
 
 #: invenio_vcs/contrib/github.py:56
 msgid "repositories"
-msgstr ""
+msgstr "repositorios"
 
 #: invenio_vcs/contrib/github.py:59
 msgid ""
 "If your organization's repositories do not show up in the list, please "
 "ensure you have enabled third-party access."
 msgstr ""
+"Si los repositorios de su organización no aparecen en la lista, asegúrese de"
+" haber habilitado el acceso de terceros."
 
 #: invenio_vcs/contrib/gitlab.py:67
 msgid "Automatically archive your GitLab projects"
-msgstr ""
+msgstr "Archiva automáticamente tus proyectos de GitLab"
 
 #: invenio_vcs/contrib/gitlab.py:81
 msgid "project"
-msgstr ""
+msgstr "proyecto"
 
 #: invenio_vcs/contrib/gitlab.py:82
 msgid "projects"
-msgstr ""
+msgstr "proyectos"
 
 #: invenio_vcs/contrib/gitlab.py:87
 msgid ""
 "If your project does not show up in the list, please ensure you have at "
 "least the 'Maintainer' role on the project or its group."
 msgstr ""
+"Si su proyecto no aparece en la lista, asegúrese de tener al menos el rol de"
+" \"Mantenedor\" en el proyecto o en su grupo."
 
 #: invenio_vcs/contrib/gitlab.py:418
 #, python-format
 msgid "Managed by %(app_name)s. Please do not edit."
-msgstr ""
+msgstr "Gestionado por %(app_name)s. Por favor, no lo edite."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:15
 msgid "Sync now"
@@ -207,6 +225,8 @@ msgid ""
 "Select the repository you want to preserve, and toggle\n"
 "                  the switch below to turn on automatic preservation of your software."
 msgstr ""
+"Seleccione el repositorio que desea conservar y active\n"
+"el interruptor que aparece a continuación para activar la conservación automática de su software."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:47
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:105
@@ -221,10 +241,13 @@ msgid ""
 "hidden=\"true\"></i></a>. %(site_name)s will automatically receive and "
 "process your release."
 msgstr ""
+"Ve a %(name)s y <a href=\"%(release_docs_link)s\" target=\"_blank\">crea una"
+" versión<i class=\"small icon external\" aria-hidden=\"true\"></i></a>. "
+"%(site_name)s recibirá y procesará automáticamente tu versión."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:62
 msgid "Check the status"
-msgstr ""
+msgstr "Comprobar el estado"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:66
 #, python-format
@@ -232,11 +255,14 @@ msgid ""
 "Click on a %(repository_name)s to view the status of each release, including"
 " whether it was successful and if you need to take any additional steps."
 msgstr ""
+"Pulse en %(repository_name)s para ver el estado de cada lanzamiento, "
+"incluyendo si se realizó correctamente y si necesita tomar alguna medida "
+"adicional."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:82
 #, python-format
 msgid "Enabled %(repository_name_plural)s"
-msgstr ""
+msgstr "Activado %(repository_name_plural)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:105
 msgid "More info"
@@ -245,7 +271,7 @@ msgstr "Más información"
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:115
 #, python-format
 msgid "You have no %(repository_name_plural)s on %(name)s."
-msgstr ""
+msgstr "No tiene ningún %(repository_name_plural)s en %(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:118
 #, python-format
@@ -253,6 +279,8 @@ msgid ""
 "Go to <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> and create your first or\n"
 "          click the Sync button to synchronize the latest changes from %(name)s."
 msgstr ""
+"Vaya a <a href=\"%(url)s\" target=\"_blank\">%(name)s <i class=\"small icon external\" aria-hidden=\"true\"></i></a> y cree su primer o\n"
+"          pulse el botón Sync para sincronizar los últimos cambios desde %(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:137
 #, python-format
@@ -266,7 +294,7 @@ msgstr "¡La preservación del software de forma sencilla!"
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:144
 #, python-format
 msgid "Connect your %(name)s account"
-msgstr ""
+msgstr "Conecte su cuenta %(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index.html:147
 msgid "Connect"
@@ -278,16 +306,18 @@ msgid ""
 "To get started, click \"Connect\" and we will get a list of your "
 "%(repository_name_plural)s from %(name)s."
 msgstr ""
+"Para empezar, pulse en \"Conectar\" y obtendremos una lista de sus "
+"%(repository_name_plural)s desde %(name)s."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:15
 #, python-format
 msgid "View %(repository_name)s on %(name)s"
-msgstr ""
+msgstr "Ver%(repository_name)s en %(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/index_item.html:16
 #, python-format
 msgid "View %(repository_name)s on %(name)s:"
-msgstr ""
+msgstr "Ver %(repository_name)s en %(name)s:"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:13
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:153
@@ -312,12 +342,12 @@ msgstr "Borrado"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:33
 msgid "Pending review"
-msgstr ""
+msgstr "Pendiente de revisión"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:64
 #, python-format
 msgid "View release on %(name)s"
-msgstr ""
+msgstr "Ver versión en %(name)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:93
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:120
@@ -342,6 +372,8 @@ msgid ""
 "files are plain text files with human-\n"
 "                        and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software."
 msgstr ""
+"Los archivos son archivos de texto plano \n"
+"con información de citación legible tanto para humanos como para máquinas. Los desarrolladores de código pueden incluirlos en sus repositorios para que otros sepan cómo citar correctamente su software."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:129
 msgid "An example of the CITATION.cff for this release can be found below:"
@@ -352,7 +384,7 @@ msgstr ""
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/release_item.html:152
 #, python-format
 msgid "%(name)s Payload"
-msgstr ""
+msgstr "%(name)sCarga útil"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/repo_switch.html:16
 msgid "Disable"
@@ -369,7 +401,7 @@ msgstr "Cabecera"
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:24
 #, python-format
 msgid "Go back to all %(repository_name_plural)s"
-msgstr ""
+msgstr "Regresar a todo %(repository_name_plural)s"
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:59
 msgid "Releases"
@@ -387,7 +419,7 @@ msgstr "¡Empezar!"
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:72
 #, python-format
 msgid "Go to %(name)s and make your first release."
-msgstr ""
+msgstr "Vaya a %(name)s y haga su primera versión."
 
 #: invenio_vcs/templates/semantic-ui/invenio_vcs/settings/view.html:92
 msgid ""
@@ -403,10 +435,12 @@ msgid ""
 "Go to {} and create a release. {}\n"
 "                  will automatically receive and process your release."
 msgstr ""
+"Vaya a {} y cree una versión. {}\n"
+"                  recibirá y procesará automáticamente su versión."
 
 #: invenio_vcs/views/vcs.py:53
 msgid "Account must be connected to the VCS provider."
-msgstr ""
+msgstr "La cuenta debe estar conectada al proveedor de VCS."
 
 #: invenio_vcs/views/vcs.py:193
 msgid "Failed to enable repository, hook creation not successful."
