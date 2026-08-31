@@ -72,7 +72,11 @@ repository_user_association = db.Table(
         primary_key=True,
     ),
     db.Column(
-        "user_id", db.Integer, db.ForeignKey("accounts_user.id"), primary_key=True
+        "user_id",
+        db.Integer,
+        db.ForeignKey("accounts_user.id"),
+        primary_key=True,
+        index=True,
     ),
     db.Column("created", UTCDateTime, nullable=False),
     db.Column("updated", UTCDateTime, nullable=False),
@@ -269,7 +273,7 @@ class Release(db.Model, Timestamp):
     )
     """Release processing errors."""
 
-    repository_id = db.Column(UUIDType, db.ForeignKey(Repository.id))
+    repository_id = db.Column(UUIDType, db.ForeignKey(Repository.id), index=True)
     """Repository identifier."""
 
     event_id = db.Column(UUIDType, db.ForeignKey(Event.id), nullable=True)
