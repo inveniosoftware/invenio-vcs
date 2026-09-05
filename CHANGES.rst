@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v0.3.6 (released 2026-09-07)
+
+- fix: update CACHE_TYPE to use SimpleCache
+
 Version v0.3.5 (released 2026-08-21)
 
 - i18n: pulled translations
