@@ -260,6 +260,15 @@ class RepositoryServiceProvider(ABC):
     @cached_property
     def oauth_remote_token(self):
         """Return OAuth remote token model."""
+        return self.get_remote_token()
+
+    def get_remote_token(self, refresh_if_needed=True):
+        """
+        Get the access token and refresh it if it is expired and `refresh_if_needed` is True.
+
+        Prefer using the cached `oauth_remote_token` instead of calling this method directly,
+        unless you want to stop a refresh from happening.
+        """
         if self._access_token is not None:
             return self._access_token
 
@@ -268,7 +277,7 @@ class RepositoryServiceProvider(ABC):
         if token is None:
             return None
 
-        if token.is_expired:
+        if token.is_expired and refresh_if_needed:
             token.refresh_access_token()
 
         return token
