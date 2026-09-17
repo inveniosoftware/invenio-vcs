@@ -53,7 +53,16 @@ class OAuthHandlers:
             oauth_unlink_external_id(dict(id=external_ids[0], method=external_method))
 
         svc = VCSService(self.provider_factory.for_user(current_user.id))
-        token = svc.provider.oauth_remote_token
+
+        token = None
+        try:
+            token = svc.provider.oauth_remote_token
+        except Exception as e:
+            current_app.logger.warning(
+                f"Failed to get remote token while handling disconnect, trying again without refresh: {e}",
+                exc_info=True,
+            )
+            token = svc.provider.get_remote_token(refresh_if_needed=False)
 
         if token:
             extra_data = token.remote_account.extra_data

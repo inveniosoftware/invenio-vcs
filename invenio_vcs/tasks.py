@@ -61,7 +61,16 @@ def disconnect_provider(provider_id, user_id, access_token, repo_hooks):
             assert remote_token is not None
 
             if remote_token.is_expired:
-                remote_token.refresh_access_token()
+                try:
+                    remote_token.refresh_access_token()
+                except Exception as e:
+                    current_app.logger.warn(
+                        f"Failed to refresh access token. It is probably too old: {e}",
+                        exc_info=True,
+                    )
+                    # Finish the task gracefully; this almost certainly just means that the token is too
+                    # old and we won't be able to delete the webhooks anyway.
+                    return
 
             svc = VCSService.for_provider_and_token(provider_id, user_id, remote_token)
 
