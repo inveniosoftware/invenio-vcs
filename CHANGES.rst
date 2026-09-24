@@ -7,6 +7,12 @@
 Changes
 =======
 
+Version v0.5.3 (released 2026-09-24)
+
+- fix(oauth): don't refresh token when disconnecting
+- fix(ci): update CACHE_TYPE to use SimpleCache
+- fix(ci): update python workflow ref (#35)
+
 Version v0.5.2 (released 2026-08-04)
 
 - fix(build): include mo files
