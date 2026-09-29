@@ -153,10 +153,10 @@ def register_ui_routes(blueprint):
 def register_api_routes(blueprint):
     """Register API routes."""
 
+    @blueprint.route("/repositories/sync", methods=["POST"])
     @login_required
     @require_vcs_connected()
     @vcs_error_handler()
-    @blueprint.route("/repositories/sync", methods=["POST"])
     def sync_user_repositories(provider):
         """Synchronizes user repos.
 
@@ -170,11 +170,11 @@ def register_api_routes(blueprint):
         db.session.commit()
 
         return "", 200
-
+    
+    @blueprint.route("/repositories/<repository_id>/enable", methods=["POST"])
     @login_required
     @require_vcs_connected()
     @vcs_error_handler()
-    @blueprint.route("/repositories/<repository_id>/enable", methods=["POST"])
     def enable_repository(provider, repository_id):
         """Enables one repository.
 
@@ -194,11 +194,11 @@ def register_api_routes(blueprint):
             raise Exception(
                 _("Failed to enable repository, hook creation not successful.")
             )
-
+        
+    @blueprint.route("/repositories/<repository_id>/disable", methods=["POST"])
     @login_required
     @require_vcs_connected()
     @vcs_error_handler()
-    @blueprint.route("/repositories/<repository_id>/disable", methods=["POST"])
     def disable_repository(provider, repository_id):
         """Disables one repository.
 
