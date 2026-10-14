@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 CERN.
+# SPDX-FileCopyrightText: 2025-2026 CERN.
 # SPDX-License-Identifier: MIT
 
 """Abstract classes to be implemented for each provider."""
@@ -197,6 +197,18 @@ class RepositoryServiceProviderFactory(ABC):
         partial fields. To get the full repository, it needs to be queried separately.
         """
         raise NotImplementedError
+
+    def webhook_is_authentic(self, headers, body: bytes) -> bool:
+        """Returns whether a webhook request was really sent by the VCS provider.
+
+        Providers verify the secret they configured on the webhook (for example a signature or
+        a token sent in a header). The default does not verify anything, so providers that do
+        not implement this keep working as before.
+
+        :param headers: the HTTP headers of the request.
+        :param body: the raw body of the request.
+        """
+        return True
 
     def for_user(self, user_id: int):
         """Creates a provider for a specific user, taking the access token from the DB."""

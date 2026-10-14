@@ -3,6 +3,8 @@
 
 """Contrib provider implementation for GitHub."""
 
+import hashlib
+import hmac
 import json
 
 import dateutil
@@ -111,6 +113,25 @@ class GitHubProviderFactory(RepositoryServiceProviderFactory):
     def provider_specific_config(self):
         """Returns the GitHub-specific config dict."""
         return self._github_specific_config
+
+    def webhook_is_authentic(self, headers, body):
+        """Verify the HMAC-SHA256 signature that GitHub sends in `X-Hub-Signature-256`.
+
+        GitHub signs the body with the secret that was set when the webhook was created. If no
+        `shared_secret` is configured, webhooks were created without one and nothing is verified.
+        """
+        secret = self.provider_specific_config["shared_secret"]
+        if not secret:
+            return True
+
+        algorithm, _sep, signature = headers.get("X-Hub-Signature-256", "").partition(
+            "="
+        )
+        expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+        # Compare bytes: `compare_digest` does not accept non-ASCII strings.
+        return algorithm == "sha256" and hmac.compare_digest(
+            expected.encode(), signature.encode()
+        )
 
     def webhook_is_create_release_event(self, event_payload):
         """Two possible actions can correspond to a create release event.
