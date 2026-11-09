@@ -7,6 +7,11 @@
 Changes
 =======
 
+Version v0.6.0 (released 2026-11-10)
+
+- chore(setup): bump dependencies
+- chore(setup): bump pytest-invenio dependency
+
 Version v0.5.3 (released 2026-09-24)
 
 - fix(oauth): don't refresh token when disconnecting
