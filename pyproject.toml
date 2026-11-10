@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2023-2026 Graz University of Technology.
 # SPDX-FileCopyrightText: 2023 Graz University of Technology.
 # SPDX-FileCopyrightText: 2026 TU Wien.
+# SPDX-FileCopyrightText: 2026 KTH Royal Institute of Technology.
 # SPDX-License-Identifier: MIT
 
 [project]
@@ -122,8 +123,6 @@ build-backend = "hatchling.build"
 [tool.babel]
 [tool.babel.compile_catalog]
 directory = "invenio_vcs/translations/"
-use_fuzzy = true
-
 [tool.babel.extract_messages]
 copyright_holder = "CERN"
 msgid_bugs_address = "info@inveniosoftware.org"
@@ -134,6 +133,10 @@ add_comments = "NOTE"
 [tool.babel.init_catalog]
 input_file = "invenio_vcs/translations/messages.pot"
 output_dir = "invenio_vcs/translations/"
+
+[[tool.babel.mappings]]
+method = "ignore"
+pattern = "**/node_modules/**"
 
 [[tool.babel.mappings]]
 method = "javascript"

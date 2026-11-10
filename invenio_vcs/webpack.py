@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2023-2026 CERN.
+# SPDX-FileCopyrightText: 2026 KTH Royal Institute of Technology.
 # SPDX-License-Identifier: MIT
 """JS/CSS Webpack bundles for theme."""
 
@@ -16,9 +17,9 @@ theme = WebpackThemeBundle(
             },
             dependencies={
                 "@babel/runtime": "^7.9.0",
-                "i18next": "^20.3.0",
-                "i18next-browser-languagedetector": "^6.1.0",
-                "react-i18next": "^11.11.0",
+                "i18next": "^27.1.1",
+                "i18next-browser-languagedetector": "^8.3.0",
+                "react-i18next": "^18.0.1",
             },
             aliases={
                 "@translations/invenio_vcs": "translations/invenio_vcs",
