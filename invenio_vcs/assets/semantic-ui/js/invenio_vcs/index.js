@@ -34,6 +34,11 @@ const REQUEST_HEADERS = {
   "X-CSRFToken": getCookie("csrftoken"),
 };
 
+const PROVIDER_DISPLAY_NAMES = {
+  github: "GitHub",
+  gitlab: "GitLab",
+};
+
 const sync_button = document.getElementById("sync_repos");
 if (sync_button) {
   sync_button.addEventListener("click", function () {
@@ -43,6 +48,7 @@ if (sync_button) {
     const buttonText = buttonTextElem.innerHTML;
     const loadingText = sync_button.dataset.loadingText;
     const provider = sync_button.dataset.provider;
+    const providerName = PROVIDER_DISPLAY_NAMES[provider] || provider;
 
     const url = `/api/user/vcs/${provider}/repositories/sync`;
     const request = new Request(url, {
@@ -85,6 +91,28 @@ if (sync_button) {
         sync_button.classList.add("disabled");
         buttonTextElem.innerHTML = buttonText;
         if (response.ok) {
+          // A normal successful sync returns an empty body
+          let data = null;
+          try {
+            data = await response.json();
+          } catch (e) {
+            data = null;
+          }
+
+          if (data && data.reauth_required && data.authorize_url) {
+            addResultMessage(
+              resultMessage,
+              "warning",
+              "key",
+              i18next.t(
+                "{{provider}} needs an additional permission to finish syncing. Redirecting you to approve it...",
+                { provider: providerName }
+              )
+            );
+            window.location.href = data.authorize_url;
+            return;
+          }
+
           addResultMessage(
             resultMessage,
             "positive",
@@ -138,6 +166,19 @@ if (sync_button) {
       }
     }
   });
+
+  // If auto_sync, finish the sync automatically
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("auto_sync") === "1") {
+    urlParams.delete("auto_sync");
+    const cleanQuery = urlParams.toString();
+    const cleanUrl =
+      window.location.pathname +
+      (cleanQuery ? `?${cleanQuery}` : "") +
+      window.location.hash;
+    window.history.replaceState(null, "", cleanUrl);
+    sync_button.click();
+  }
 }
 
 const repositories = document.getElementsByClassName("repository-item");
