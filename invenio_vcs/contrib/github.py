@@ -14,7 +14,11 @@ from invenio_i18n import gettext as _
 from invenio_oauthclient.contrib.github import GitHubOAuthSettingsHelper
 from werkzeug.utils import cached_property
 
-from invenio_vcs.errors import ReleaseZipballFetchError, VCSTokenNotFound
+from invenio_vcs.errors import (
+    InsufficientScopeError,
+    ReleaseZipballFetchError,
+    VCSTokenNotFound,
+)
 from invenio_vcs.generic_models import (
     GenericContributor,
     GenericOwner,
@@ -269,11 +273,15 @@ class GitHubProvider(RepositoryServiceProvider):
         user_ids: list[str] = []
         # This API route has a `permission` param but it's not supported by github3.py
         # https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#list-repository-collaborators
-        for collaborator in repo.collaborators():
-            if not collaborator.permissions["admin"]:
-                continue
+        try:
+            for collaborator in repo.collaborators():
+                if not collaborator.permissions["admin"]:
+                    continue
 
-            user_ids.append(str(collaborator.id))
+                user_ids.append(str(collaborator.id))
+        except github3.exceptions.ForbiddenError:
+            # The user's token lacks the `repo` scope needed to list collaborators.
+            raise InsufficientScopeError(user=self.user_id)
 
         return user_ids
 

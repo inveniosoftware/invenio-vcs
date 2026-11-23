@@ -25,6 +25,21 @@ class RepositoryAccessError(VCSError):
         self.repo_id = repo_id
 
 
+class InsufficientScopeError(VCSError):
+    """The account's OAuth token is missing a scope required for this operation.
+
+    Account-wide condition: affects every repository for this account equally,
+    not just the one being processed when it was first raised.
+    """
+
+    message = _("The account's token is missing a required OAuth scope.")
+
+    def __init__(self, user=None, message=None):
+        """Constructor."""
+        super().__init__(message or self.message)
+        self.user = user
+
+
 class RepositoryDisabledError(VCSError):
     """Repository access permissions error."""
 

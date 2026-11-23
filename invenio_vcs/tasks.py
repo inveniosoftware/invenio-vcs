@@ -16,7 +16,11 @@ from invenio_oauthclient.models import RemoteAccount, RemoteToken
 from invenio_oauthclient.proxies import current_oauthclient
 
 from invenio_vcs.config import get_provider_by_id
-from invenio_vcs.errors import CustomVCSReleaseNoRetryError, RepositoryAccessError
+from invenio_vcs.errors import (
+    CustomVCSReleaseNoRetryError,
+    InsufficientScopeError,
+    RepositoryAccessError,
+)
 from invenio_vcs.models import Release, ReleaseStatus
 from invenio_vcs.proxies import current_vcs
 
@@ -129,6 +133,13 @@ def sync_repo_users(provider, user_id, repo_provider_ids):
                 with db.session.begin_nested():
                     svc.sync_repo_users(repo_id)
                 db.session.commit()
+            except InsufficientScopeError as e:
+                # Every remaining repo in this batch would fail the same way
+                current_app.logger.warning(
+                    "Stopping repo-user sync for the rest of this batch: " f"{e}",
+                    exc_info=True,
+                )
+                break
             except RepositoryAccessError as e:
                 current_app.logger.warning(str(e), exc_info=True)
     except Exception as exc:
