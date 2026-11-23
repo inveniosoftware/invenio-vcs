@@ -6,8 +6,17 @@
 """VCS views blueprint for Invenio platform."""
 
 from functools import wraps
+from urllib.parse import quote
 
-from flask import Blueprint, abort, current_app, render_template, request
+from flask import (
+    Blueprint,
+    abort,
+    current_app,
+    jsonify,
+    render_template,
+    request,
+    url_for,
+)
 from flask_login import current_user, login_required
 from invenio_db import db
 from invenio_i18n import gettext as _
@@ -166,6 +175,18 @@ def register_api_routes(blueprint):
             POST /account/settings/github/hook
         """
         svc = VCSService.for_provider_and_user(provider, current_user.id)
+
+        extra_data = svc.provider.oauth_remote_account.extra_data
+        if extra_data.get("needs_scope_reauth"):
+            # Account migrated from an older integration without all scopes
+            extra_data["needs_scope_reauth"] = False
+            extra_data.changed()
+            db.session.commit()
+
+            next_url = f"/account/settings/vcs/{provider}/?auto_sync=1"
+            authorize_url = f"/oauth/login/{provider}/?next={quote(next_url, safe='')}"
+            return jsonify(reauth_required=True, authorize_url=authorize_url), 200
+
         svc.sync()
         db.session.commit()
 
