@@ -7,6 +7,10 @@
 Changes
 =======
 
+Version v0.7.0 (released 2026-11-24)
+
+- chore(setup): bump dependencies
+
 Version v0.6.0 (released 2026-11-10)
 
 - chore(setup): bump dependencies
