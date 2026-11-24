@@ -6,13 +6,16 @@
 
 import logging
 from datetime import datetime, timedelta, timezone
+from types import SimpleNamespace
 from typing import TYPE_CHECKING
 
 from celery import shared_task
 from flask import current_app, g
+from github3.exceptions import AuthenticationFailed
+from gitlab.exceptions import GitlabAuthenticationError
 from invenio_db import db
 from invenio_i18n import gettext as _
-from invenio_oauthclient.models import RemoteAccount, RemoteToken
+from invenio_oauthclient.models import RemoteAccount
 from invenio_oauthclient.proxies import current_oauthclient
 
 from invenio_vcs.config import get_provider_by_id
@@ -53,7 +56,8 @@ def disconnect_provider(provider_id, user_id, access_token, repo_hooks):
     """Uninstall webhooks."""
     # Note at this point the remote account and all associated data have
     # already been deleted. The celery task is passed the access_token to make
-    # some last cleanup and afterwards delete itself remotely.
+    # some last cleanup and afterwards delete itself remotely. Refreshing is
+    # handled by disconnect_handler before the account is deleted
 
     # Local import to avoid circular imports
     from .service import VCSService
@@ -61,22 +65,9 @@ def disconnect_provider(provider_id, user_id, access_token, repo_hooks):
     try:
         # Create a nested transaction to make sure that hook deletion + token revoke is atomic
         with db.session.begin_nested():
-            remote_token = RemoteToken.get_by_token(provider_id, access_token)
-            assert remote_token is not None
-
-            if remote_token.is_expired:
-                try:
-                    remote_token.refresh_access_token()
-                except Exception as e:
-                    current_app.logger.warn(
-                        f"Failed to refresh access token. It is probably too old: {e}",
-                        exc_info=True,
-                    )
-                    # Finish the task gracefully; this almost certainly just means that the token is too
-                    # old and we won't be able to delete the webhooks anyway.
-                    return
-
-            svc = VCSService.for_provider_and_token(provider_id, user_id, remote_token)
+            svc = VCSService.for_provider_and_token(
+                provider_id, user_id, SimpleNamespace(access_token=access_token)
+            )
 
             for repo_id, repo_hook in repo_hooks:
                 if svc.disable_repository(repo_id, repo_hook):
@@ -87,6 +78,12 @@ def disconnect_provider(provider_id, user_id, access_token, repo_hooks):
 
             # If we finished our clean-up successfully, we can revoke the token
             svc.provider.revoke_token(access_token)
+    except (GitlabAuthenticationError, AuthenticationFailed) as exc:
+        # The token is stale/invalid
+        current_app.logger.warning(
+            f"Token is no longer valid, giving up on remote cleanup: {exc}",
+            exc_info=True,
+        )
     except Exception as exc:
         # Retry in case vcs may be down...
         disconnect_provider.retry(exc=exc)
