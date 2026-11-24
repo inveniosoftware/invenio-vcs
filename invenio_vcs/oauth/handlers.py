@@ -54,6 +54,7 @@ class OAuthHandlers:
 
         svc = VCSService(self.provider_factory.for_user(current_user.id))
 
+        can_clean_up_remotely = True
         token = None
         try:
             token = svc.provider.oauth_remote_token
@@ -63,6 +64,7 @@ class OAuthHandlers:
                 exc_info=True,
             )
             token = svc.provider.get_remote_token(refresh_if_needed=False)
+            can_clean_up_remotely = False
 
         if token:
             extra_data = token.remote_account.extra_data
@@ -82,13 +84,14 @@ class OAuthHandlers:
             # Commit any changes before running the ascynhronous task
             db.session.commit()
 
-            # Send Celery task for webhooks removal and token revocation
-            disconnect_provider.delay(
-                self.provider_factory.id,
-                current_user.id,
-                token.access_token,
-                repos_with_hooks,
-            )
+            if can_clean_up_remotely:
+                # Send Celery task for webhooks removal and token revocation
+                disconnect_provider.delay(
+                    self.provider_factory.id,
+                    current_user.id,
+                    token.access_token,
+                    repos_with_hooks,
+                )
 
             # Delete the RemoteAccount (along with the associated RemoteToken)
             token.remote_account.delete()
