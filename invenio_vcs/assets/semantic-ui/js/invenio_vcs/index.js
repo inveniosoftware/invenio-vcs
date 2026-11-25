@@ -90,29 +90,30 @@ if (sync_button) {
         loaderIcon.classList.remove("loading");
         sync_button.classList.add("disabled");
         buttonTextElem.innerHTML = buttonText;
+
+        // A normal successful sync returns an empty body
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (e) {
+          data = null;
+        }
+
+        if (data && data.reauth_required && data.authorize_url) {
+          addResultMessage(
+            resultMessage,
+            "warning",
+            "key",
+            i18next.t(
+              "{{provider}} needs an additional permission to finish syncing. Redirecting you to approve it...",
+              { provider: providerName }
+            )
+          );
+          window.location.href = data.authorize_url;
+          return;
+        }
+
         if (response.ok) {
-          // A normal successful sync returns an empty body
-          let data = null;
-          try {
-            data = await response.json();
-          } catch (e) {
-            data = null;
-          }
-
-          if (data && data.reauth_required && data.authorize_url) {
-            addResultMessage(
-              resultMessage,
-              "warning",
-              "key",
-              i18next.t(
-                "{{provider}} needs an additional permission to finish syncing. Redirecting you to approve it...",
-                { provider: providerName }
-              )
-            );
-            window.location.href = data.authorize_url;
-            return;
-          }
-
           addResultMessage(
             resultMessage,
             "positive",

@@ -10,6 +10,7 @@ from flask_login import current_user
 from invenio_db import db
 from invenio_oauth2server.models import Token as ProviderToken
 from invenio_oauthclient import oauth_unlink_external_id
+from invenio_oauthclient.models import RemoteToken
 
 from invenio_vcs.service import VCSService
 from invenio_vcs.tasks import disconnect_provider
@@ -36,6 +37,16 @@ class OAuthHandlers:
             db.session.commit()
         except Exception as e:
             current_app.logger.warning(str(e), exc_info=True)
+
+    def confirm_scope_reauth(self, remote, access_token):
+        """Clear the one-time reauth flag after user has re-authorized."""
+        remote_token = RemoteToken.get_by_token(remote.consumer_key, access_token)
+        if remote_token is None:
+            return
+        extra_data = remote_token.remote_account.extra_data
+        if extra_data.pop("needs_scope_reauth", None) is not None:
+            extra_data.changed()
+            db.session.commit()
 
     def disconnect_handler(self, remote):
         """Disconnect callback handler for the provider."""

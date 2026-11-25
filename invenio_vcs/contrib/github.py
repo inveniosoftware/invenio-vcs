@@ -11,7 +11,7 @@ import requests
 from flask import current_app
 from github3.repos import ShortRepository
 from invenio_i18n import gettext as _
-from invenio_oauthclient.contrib.github import GitHubOAuthSettingsHelper
+from invenio_oauthclient.contrib.github import GitHubOAuthSettingsHelper, account_info
 from werkzeug.utils import cached_property
 
 from invenio_vcs.errors import (
@@ -81,6 +81,11 @@ class GitHubProviderFactory(RepositoryServiceProviderFactory):
         super().update_config_with_override(config_override)
         self._github_specific_config.update(config_override.get("config", {}))
 
+    def _account_info_handler(self, remote, resp):
+        """Helper for the OAuth client."""
+        self.oauth_handlers.confirm_scope_reauth(remote, resp["access_token"])
+        return account_info(remote, resp)
+
     @property
     def oauth_remote_config(self):
         """
@@ -107,6 +112,7 @@ class GitHubProviderFactory(RepositoryServiceProviderFactory):
         github_app["signup_handler"][
             "setup"
         ] = self.oauth_handlers.account_setup_handler
+        github_app["signup_handler"]["info"] = self._account_info_handler
         github_app["params"]["request_token_params"] = request_token_params
 
         return github_app
