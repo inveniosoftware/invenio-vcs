@@ -7,6 +7,13 @@
 Changes
 =======
 
+Version v0.7.1 (released 2026-11-25)
+
+- fix(sync): one-time GH reauth flow for migrated accounts
+- fix(disconnect): refresh token before deletion
+- feat(sync): prompt for re-authorization on migrated accounts
+- fix(sync): repo-user sync on insufficient OAuth scope
+
 Version v0.7.0 (released 2026-11-24)
 
 - chore(setup): bump dependencies
