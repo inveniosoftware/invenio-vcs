@@ -114,6 +114,38 @@ def test_github_provider_list_repository_contributors_excludes_bots(
         assert "github-actions[bot]" not in {c.username for c in contributors}
 
 
+def test_github_provider_list_repository_contributors_skips_unreachable_accounts(
+    test_user,
+    test_generic_repositories: list[GenericRepository],
+    test_generic_contributors: list[GenericContributor],
+    test_collaborators: list[dict[str, Any]],
+    test_generic_webhooks: list[GenericWebhook],
+    test_generic_user: GenericUser,
+    test_file: dict[str, Any],
+):
+    """A contributor whose account is gone must be skipped, not fail the release.
+
+    Regression test: a `github3.exceptions.NotFoundError` raised while refreshing
+    one contributor (e.g. a deleted/banned GitHub account) previously propagated
+    unhandled and aborted the entire release.
+    """
+    patcher = GitHubPatcher(test_user)
+    for provider in patcher.patch(
+        test_generic_repositories,
+        test_generic_contributors,
+        test_collaborators,
+        test_generic_webhooks,
+        test_generic_user,
+        test_file,
+    ):
+        contributors = provider.list_repository_contributors(
+            test_generic_repositories[0].id, 10
+        )
+        assert contributors is not None
+        assert len(contributors) == len(test_generic_contributors)
+        assert "ghost-user" not in {c.username for c in contributors}
+
+
 def test_vcs_provider_get_repository_owner(
     vcs_provider: RepositoryServiceProvider,
     test_generic_repositories: list[GenericRepository],

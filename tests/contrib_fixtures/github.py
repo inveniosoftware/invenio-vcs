@@ -538,6 +538,20 @@ class GitHubPatcher(TestProviderPatcher):
         )
         contributors.append(bot_contributor)
 
+        # A contributor whose account is no longer reachable.
+        # list_repository_contributors must skip just this one
+        deleted_user_response = MagicMock()
+        deleted_user_response.status_code = 404
+        deleted_user_response.json.return_value = {"message": "Not Found"}
+        deleted_contributor = github3.users.Contributor(
+            github_contributor_metadata(88888, "ghost-user", 3),
+            mock_api.session,
+        )
+        deleted_contributor.refresh = MagicMock(
+            side_effect=github3.exceptions.NotFoundError(deleted_user_response)
+        )
+        contributors.append(deleted_contributor)
+
         collaborators: list[github3.users.Collaborator] = []
         for collaborator in test_collaborators:
             collaborators.append(
