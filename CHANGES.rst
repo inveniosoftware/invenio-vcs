@@ -7,6 +7,13 @@
 Changes
 =======
 
+Version v0.7.2 (released 2026-11-26)
+
+- fix(github): skip contributors whose account is unreachable
+- fix(models): fix Release.__repr__
+- perf(models): index release repository_id and repo-user user_id
+- perf(models): index release repository_id and repo-user user_id
+
 Version v0.7.1 (released 2026-11-25)
 
 - fix(sync): one-time GH reauth flow for migrated accounts
