@@ -283,7 +283,9 @@ def github_collaborator_metadata(admin: bool, login: str, id: int):
     }
 
 
-def github_contributor_metadata(id: int, login: str, contributions: int):
+def github_contributor_metadata(
+    id: int, login: str, contributions: int, type_: str = "User"
+):
     """Generate metadata for a repo contributor."""
     return {
         "login": login,
@@ -304,7 +306,7 @@ def github_contributor_metadata(id: int, login: str, contributions: int):
         "events_url": "https://api.github.com/users/%s/events{/privacy}" % login,
         "received_events_url": "https://api.github.com/users/%s/received_events"
         % login,
-        "type": "User",
+        "type": type_,
         "site_admin": False,
         "contributions": contributions,
     }
@@ -522,6 +524,19 @@ class GitHubPatcher(TestProviderPatcher):
                 )
             )
             contributors.append(contributor)
+
+        # A bot account, e.g. "github-actions[bot]", mixed in among the real
+        # contributors. list_repository_contributors must exclude these.
+        bot_contributor = github3.users.Contributor(
+            github_contributor_metadata(99999, "github-actions[bot]", 5, type_="Bot"),
+            mock_api.session,
+        )
+        bot_contributor.refresh = MagicMock(
+            side_effect=AssertionError(
+                "bot contributors must be filtered out before being refreshed"
+            )
+        )
+        contributors.append(bot_contributor)
 
         collaborators: list[github3.users.Collaborator] = []
         for collaborator in test_collaborators:

@@ -396,6 +396,8 @@ class GitHubProvider(RepositoryServiceProvider):
         # This API call returns the contributors sorted in order of descending number
         # of commits. See https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repository-contributors
         for c in repo.contributors(number=max):
+            if c.type != "User":
+                continue
             # Extract the contribution count before refreshing (since this is not included in the full User object)
             contributions_count = c.contributions_count
             c = c.refresh()
