@@ -27,8 +27,16 @@ class VCSRelease:
     is designed to work on any Invenio instance (not just RDM).
     """
 
-    def __init__(self, release: Release, provider: "RepositoryServiceProvider"):
-        """Constructor."""
+    def __init__(
+        self,
+        release: Release,
+        provider: "RepositoryServiceProvider | None" = None,
+    ):
+        """Constructor.
+
+        `provider` may be omitted if the VCS provider's API is never called.
+        A property that does require API access without provider raises `AttributeError`.
+        """
         self.db_release = release
         self.provider = provider
         self._resolved_zipball_url = None
