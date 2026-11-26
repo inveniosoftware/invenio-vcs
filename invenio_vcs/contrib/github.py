@@ -400,7 +400,17 @@ class GitHubProvider(RepositoryServiceProvider):
                 continue
             # Extract the contribution count before refreshing (since this is not included in the full User object)
             contributions_count = c.contributions_count
-            c = c.refresh()
+            try:
+                c = c.refresh()
+            except github3.exceptions.NotFoundError:
+                # The contributor's account is no longer reachable (deleted, banned,
+                # etc.). Skip just this one rather than failing the whole release.
+                current_app.logger.warning(
+                    "GitHub contributor id=%s is no longer reachable, skipping.",
+                    c.id,
+                    exc_info=True,
+                )
+                continue
             contributors.append(
                 GenericContributor(
                     id=str(c.id),
