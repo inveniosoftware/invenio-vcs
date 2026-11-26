@@ -81,7 +81,7 @@ class VCSReceiver(Receiver):
             if repo.enabled_by_user_id != event.user_id:
                 # Ensure the webhook URL contained the access token of the user who created the webhook (i.e. enabled the repository).
                 # Therefore, we ensure the webhook call contains the data of a repository/release that belongs to the user.
-                raise InvalidSenderError(event.id, event.user.id)
+                raise InvalidSenderError(event.id, event.user_id)
 
             if repo.enabled:
                 release = Release(

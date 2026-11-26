@@ -80,6 +80,60 @@ def test_webhook_post(
     assert release.errors is None
 
 
+def test_webhook_post_invalid_sender(
+    app,
+    db,
+    tester_id,
+    unlinked_user,
+    test_generic_repositories: list[GenericRepository],
+    test_generic_webhooks: list[GenericWebhook],
+    test_generic_release: GenericRelease,
+    test_generic_owner: GenericOwner,
+    provider_patcher: TestProviderPatcher,
+):
+    """A webhook event whose user doesn't own the repo's webhook is rejected with 403."""
+    generic_repo = test_generic_repositories[0]
+    generic_webhook = next(
+        h for h in test_generic_webhooks if h.repository_id == generic_repo.id
+    )
+
+    db_repo = Repository.get(
+        provider=provider_patcher.provider_factory().id, provider_id=generic_repo.id
+    )
+    if not db_repo:
+        db_repo = Repository.create(
+            provider=provider_patcher.provider_factory().id,
+            provider_id=generic_repo.id,
+            default_branch=generic_repo.default_branch,
+            full_name=generic_repo.full_name,
+            description=generic_repo.description,
+        )
+
+    # Enable repository webhook for `tester_id`, but send the event as `unlinked_user`
+    db_repo.hook = generic_webhook.id
+    db_repo.enabled_by_user_id = tester_id
+    db.session.add(db_repo)
+    db.session.commit()
+
+    payload = json.dumps(
+        provider_patcher.test_webhook_payload(
+            generic_repo, test_generic_release, test_generic_owner
+        )
+    )
+    headers = [("Content-Type", "application/json")]
+    with app.test_request_context(headers=headers, data=payload):
+        event = Event.create(
+            receiver_id=provider_patcher.provider_factory().id,
+            user_id=unlinked_user.id,
+        )
+        db.session.add(event)
+        db.session.commit()
+        event.process()
+
+    assert event.response_code == 403
+    assert db_repo.releases.count() == 0
+
+
 def test_webhook_post_fail(
     app,
     tester_id,
