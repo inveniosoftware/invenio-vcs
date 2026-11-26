@@ -3,13 +3,17 @@
 
 """Test invenio-vcs provider layer."""
 
+from typing import Any
+
 from invenio_vcs.generic_models import (
     GenericContributor,
     GenericRepository,
+    GenericUser,
     GenericWebhook,
 )
 from invenio_vcs.providers import RepositoryServiceProvider
 from invenio_vcs.service import VCSService
+from tests.contrib_fixtures.github import GitHubPatcher
 
 
 def test_vcs_provider_list_repositories(
@@ -77,6 +81,37 @@ def test_vcs_provider_list_repository_contributors(
     assert contributors is not None
     assert len(contributors) == len(test_generic_contributors)
     # The list order is arbitrary so we cannot validate that the IDs match up
+
+
+def test_github_provider_list_repository_contributors_excludes_bots(
+    test_user,
+    test_generic_repositories: list[GenericRepository],
+    test_generic_contributors: list[GenericContributor],
+    test_collaborators: list[dict[str, Any]],
+    test_generic_webhooks: list[GenericWebhook],
+    test_generic_user: GenericUser,
+    test_file: dict[str, Any],
+):
+    """Bot accounts (e.g. "github-actions[bot]") must not be credited as contributors.
+
+    This matches the legacy invenio-github behaviour, which filtered contributors
+    down to `type == "User"` before any were returned.
+    """
+    patcher = GitHubPatcher(test_user)
+    for provider in patcher.patch(
+        test_generic_repositories,
+        test_generic_contributors,
+        test_collaborators,
+        test_generic_webhooks,
+        test_generic_user,
+        test_file,
+    ):
+        contributors = provider.list_repository_contributors(
+            test_generic_repositories[0].id, 10
+        )
+        assert contributors is not None
+        assert len(contributors) == len(test_generic_contributors)
+        assert "github-actions[bot]" not in {c.username for c in contributors}
 
 
 def test_vcs_provider_get_repository_owner(
