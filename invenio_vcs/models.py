@@ -300,7 +300,7 @@ class Release(db.Model, Timestamp):
 
     def __repr__(self):
         """Get release representation."""
-        return f"<Release {self.tag}:{self.provider_id} ({self.status.title})>"
+        return f"<Release {self.tag}:{self.provider_id} ({self.status.name.title()})>"
 
     @classmethod
     def get_for_record(cls, record_id, only_draft=False) -> Release | None:
