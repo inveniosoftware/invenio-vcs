@@ -6,9 +6,12 @@
 from time import sleep
 from unittest.mock import patch
 
+import pytest
+from celery.exceptions import Retry
 from invenio_oauthclient.models import RemoteAccount
 from invenio_webhooks.models import Event
 
+from invenio_vcs.errors import CustomVCSReleaseNoRetryError
 from invenio_vcs.generic_models import (
     GenericOwner,
     GenericRelease,
@@ -63,6 +66,52 @@ def test_real_process_release_task(
     assert release.status == ReleaseStatus.PUBLISHED
     # This uuid is a fake one set by TestVCSRelease fixture
     assert str(release.record_id) == "445aaacd-9de1-41ab-af52-25ab6cb93df7"
+
+
+def test_process_release_task_marks_failed_on_error(
+    db,
+    tester_id,
+    vcs_service: VCSService,
+    test_generic_repositories: list[GenericRepository],
+    test_generic_release: GenericRelease,
+    test_generic_owner: GenericOwner,
+    provider_patcher: TestProviderPatcher,
+):
+    """A release whose processing fails ends up FAILED, not stuck in PROCESSING."""
+    vcs_service.sync()
+
+    generic_repo = test_generic_repositories[0]
+    vcs_service.enable_repository(generic_repo.id)
+    db_repo = vcs_service.get_repository(generic_repo.id)
+
+    event = Event(
+        receiver_id=vcs_service.provider.factory.id,
+        user_id=tester_id,
+        payload=provider_patcher.test_webhook_payload(
+            generic_repo, test_generic_release, test_generic_owner
+        ),
+    )
+
+    db_release = Release(
+        provider=vcs_service.provider.factory.id,
+        provider_id=test_generic_release.id,
+        tag=test_generic_release.tag_name,
+        repository=db_repo,
+        event=event,
+        status=ReleaseStatus.RECEIVED,
+    )
+    db.session.add(db_release)
+    db.session.commit()
+
+    with patch(
+        "tests.fixtures.TestVCSRelease.process_release",
+        side_effect=CustomVCSReleaseNoRetryError("401 Bad credentials"),
+    ):
+        process_release.delay(vcs_service.provider.factory.id, db_release.provider_id)
+
+    release = db_repo.releases.first()
+    assert release.status == ReleaseStatus.FAILED
+    assert release.errors == {"errors": "401 Bad credentials"}
 
 
 def test_refresh_accounts(db, test_user, vcs_provider: RepositoryServiceProvider):
