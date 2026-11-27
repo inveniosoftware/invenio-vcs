@@ -41,6 +41,7 @@ def _get_err_obj(msg):
 
 def release_default_exception_handler(release: "VCSRelease", ex):
     """Default handler."""
+    release.db_release.status = ReleaseStatus.FAILED
     release.db_release.errors = _get_err_obj(str(ex))
     db.session.commit()
 
