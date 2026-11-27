@@ -7,6 +7,12 @@
 Changes
 =======
 
+Version v0.7.3 (released 2026-11-27)
+
+- fix(tasks): set release to failed on error
+- fix: don't require a VCS provider to render a release badge
+- fix(receivers): fix InvalidSenderError
+
 Version v0.7.2 (released 2026-11-26)
 
 - fix(github): skip contributors whose account is unreachable
