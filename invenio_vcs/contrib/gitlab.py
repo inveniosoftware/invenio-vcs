@@ -8,7 +8,11 @@
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import hmac
 import itertools
+import time
 from typing import TYPE_CHECKING, Any
 
 import dateutil
@@ -56,6 +60,10 @@ def _gitlab_response_error_handler(f):
     return inner_function
 
 
+#: Seconds a signed webhook request stays valid (protects against replayed requests).
+_SIGNATURE_TOLERANCE = 300
+
+
 class GitLabProviderFactory(RepositoryServiceProviderFactory):
     """Contrib implementation factory for GitLab."""
 
@@ -93,6 +101,9 @@ class GitLabProviderFactory(RepositoryServiceProviderFactory):
         self._gitlab_specific_config = dict()
         self._gitlab_specific_config.update(
             shared_validation_token="",
+            # Recommended over `shared_validation_token`, requires GitLab 19.0 or newer.
+            # Format: "whsec_" followed by the base64 encoding of a 32 byte key.
+            shared_signing_token="",
             # Only sync projects with one of these visibilities.
             allowed_project_visibilities=["private", "internal", "public"],
         )
@@ -184,6 +195,52 @@ class GitLabProviderFactory(RepositoryServiceProviderFactory):
     def url_for_new_repo(self) -> str:
         """The URL for creating a new repository."""
         return f"{self.base_url}/projects/new"
+
+    def webhook_is_authentic(self, headers, body: bytes) -> bool:
+        """Verify that a webhook request was sent by GitLab, using the webhook secret.
+
+        If a `shared_signing_token` is configured (GitLab 19.0+), the request must carry a valid
+        signature. Otherwise, if a `shared_validation_token` is configured, it must be sent as is in
+        the `X-Gitlab-Token` header. If neither is configured, webhooks were created without a
+        secret and nothing is verified.
+        """
+        signing_token = self.provider_specific_config.get("shared_signing_token")
+        if signing_token:
+            return self._signature_is_valid(signing_token, headers, body)
+
+        token = self.provider_specific_config.get("shared_validation_token")
+        if not token:
+            return True
+
+        # Compare bytes: `compare_digest` does not accept non-ASCII strings.
+        return hmac.compare_digest(
+            headers.get("X-Gitlab-Token", "").encode(), token.encode()
+        )
+
+    @staticmethod
+    def _signature_is_valid(signing_token, headers, body: bytes) -> bool:
+        """Verify the HMAC-SHA256 signature that GitLab sends with signing tokens.
+
+        GitLab signs "{webhook-id}.{webhook-timestamp}.{body}" with the key encoded in the token
+        and sends `v1,<base64 signature>` in `webhook-signature` (possibly several, separated by
+        spaces). See https://docs.gitlab.com/user/project/integrations/webhooks/
+        """
+        message_id = headers.get("webhook-id", "")
+        timestamp = headers.get("webhook-timestamp", "")
+        # Reject old requests, so a captured request cannot be sent again.
+        if not (timestamp.isascii() and timestamp.isdigit()):
+            return False
+        if abs(time.time() - int(timestamp)) > _SIGNATURE_TOLERANCE:
+            return False
+
+        key = base64.b64decode(signing_token.removeprefix("whsec_"), validate=True)
+        message = "{}.{}.".format(message_id, timestamp).encode() + body
+        digest = hmac.new(key, message, hashlib.sha256).digest()
+        expected = ("v1," + base64.b64encode(digest).decode()).encode()
+        return any(
+            hmac.compare_digest(expected, signature.encode())
+            for signature in headers.get("webhook-signature", "").split()
+        )
 
     def webhook_is_create_release_event(self, event_payload: dict[str, Any]):
         """Identify if the webhook payload is one we want to use."""
@@ -406,7 +463,7 @@ class GitLabProvider(RepositoryServiceProvider):
     @property
     def _hook_data(self):
         """Reusable GitLab-specific config passed to the hooks API."""
-        return {
+        data = {
             "url": self.webhook_url,
             "token": self.factory.provider_specific_config.get(
                 "shared_validation_token"
@@ -420,6 +477,12 @@ class GitLabProvider(RepositoryServiceProvider):
                 app_name=current_app.config.get("THEME_SITENAME", "Invenio"),
             ),
         }
+        signing_token = self.factory.provider_specific_config.get(
+            "shared_signing_token"
+        )
+        if signing_token:
+            data["signing_token"] = signing_token
+        return data
 
     @_gitlab_response_error_handler
     def create_webhook(self, repository_id: str) -> str | None:

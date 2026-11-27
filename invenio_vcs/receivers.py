@@ -1,8 +1,9 @@
-# SPDX-FileCopyrightText: 2025 CERN.
+# SPDX-FileCopyrightText: 2025-2026 CERN.
 # SPDX-License-Identifier: MIT
 
 """Task for managing vcs integration."""
 
+from flask import request
 from invenio_db import db
 from invenio_webhooks.models import Event as WebhookEvent
 from invenio_webhooks.models import Receiver
@@ -27,6 +28,15 @@ class VCSReceiver(Receiver):
         """Constructor."""
         super().__init__(receiver_id)
         self.provider_factory = get_provider_by_id(receiver_id)
+
+    def check_signature(self):
+        """Check that the request was sent by the VCS provider, using the webhook secret.
+
+        Called by invenio-webhooks before the payload is read. A failed check rejects the event.
+        """
+        return self.provider_factory.webhook_is_authentic(
+            request.headers, request.get_data()
+        )
 
     def run(self, event: WebhookEvent):
         """Process an event.
