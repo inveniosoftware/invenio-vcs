@@ -17,6 +17,7 @@ from werkzeug.utils import cached_property
 from invenio_vcs.errors import (
     InsufficientScopeError,
     ReleaseZipballFetchError,
+    RepositoryAccessError,
     VCSTokenNotFound,
 )
 from invenio_vcs.generic_models import (
@@ -251,28 +252,42 @@ class GitHubProvider(RepositoryServiceProvider):
 
         return repos
 
+    def _repository_with_id_or_raise(self, repository_id):
+        """Fetch a repository by id, raising RepositoryAccessError if GitHub blocks it."""
+        try:
+            return self._github.repository_with_id(int(repository_id))
+        except (
+            github3.exceptions.ForbiddenError,
+            github3.exceptions.UnavailableForLegalReasons,
+        ):
+            raise RepositoryAccessError(user=self.user_id, repo_id=repository_id)
+
     def list_repository_webhooks(self, repository_id):
         """List a repo's webhooks."""
         assert repository_id.isdigit()
-        repo = self._github.repository_with_id(int(repository_id))
+        repo = self._repository_with_id_or_raise(repository_id)
         if repo is None:
             return None
 
         hooks = []
-        for hook in repo.hooks():
-            hooks.append(
-                GenericWebhook(
-                    id=str(hook.id),
-                    repository_id=repository_id,
-                    url=hook.config.get("url"),
+        try:
+            for hook in repo.hooks():
+                hooks.append(
+                    GenericWebhook(
+                        id=str(hook.id),
+                        repository_id=repository_id,
+                        url=hook.config.get("url"),
+                    )
                 )
-            )
+        except github3.exceptions.NotFoundError:
+            # GitHub returns 404 for /hooks when the token no longer has admin access
+            raise RepositoryAccessError(user=self.user_id, repo_id=repository_id)
         return hooks
 
     def list_repository_user_ids(self, repository_id: str):
         """List the admin collaborator User IDs of a repository."""
         assert repository_id.isdigit()
-        repo = self._github.repository_with_id(int(repository_id))
+        repo = self._repository_with_id_or_raise(repository_id)
         if repo is None:
             return None
 

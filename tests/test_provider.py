@@ -4,7 +4,12 @@
 """Test invenio-vcs provider layer."""
 
 from typing import Any
+from unittest.mock import MagicMock, patch
 
+import github3.exceptions
+import pytest
+
+from invenio_vcs.errors import RepositoryAccessError
 from invenio_vcs.generic_models import (
     GenericContributor,
     GenericRepository,
@@ -48,6 +53,69 @@ def test_vcs_provider_list_user_ids(vcs_provider: RepositoryServiceProvider):
     # Only one user should have admin privileges
     assert len(user_ids) == 1
     assert user_ids[0] == "1"
+
+
+@pytest.mark.parametrize(
+    "github_exception,status_code",
+    [
+        (github3.exceptions.ForbiddenError, 403),
+        (github3.exceptions.UnavailableForLegalReasons, 451),
+    ],
+)
+def test_github_provider_list_user_ids_repository_access_blocked(
+    test_user, github_exception, status_code
+):
+    """A repository GitHub has blocked (DMCA/ToS) must raise RepositoryAccessError."""
+    provider = GitHubPatcher(test_user).provider
+
+    mock_api = MagicMock()
+    mock_api.repository_with_id.side_effect = github_exception(
+        MagicMock(status_code=status_code)
+    )
+
+    with patch("invenio_vcs.contrib.github.GitHubProvider._github", new=mock_api):
+        with pytest.raises(RepositoryAccessError):
+            provider.list_repository_user_ids("123")
+
+
+@pytest.mark.parametrize(
+    "github_exception,status_code",
+    [
+        (github3.exceptions.ForbiddenError, 403),
+        (github3.exceptions.UnavailableForLegalReasons, 451),
+    ],
+)
+def test_github_provider_list_webhooks_repository_access_blocked(
+    test_user, github_exception, status_code
+):
+    """Same as above, for the sibling call site used when syncing webhooks."""
+    provider = GitHubPatcher(test_user).provider
+
+    mock_api = MagicMock()
+    mock_api.repository_with_id.side_effect = github_exception(
+        MagicMock(status_code=status_code)
+    )
+
+    with patch("invenio_vcs.contrib.github.GitHubProvider._github", new=mock_api):
+        with pytest.raises(RepositoryAccessError):
+            provider.list_repository_webhooks("123")
+
+
+def test_github_provider_list_webhooks_lost_admin_access(test_user):
+    """Losing admin access to a repo's hooks must raise RepositoryAccessError."""
+    provider = GitHubPatcher(test_user).provider
+
+    mock_repo = MagicMock()
+    mock_repo.hooks.side_effect = github3.exceptions.NotFoundError(
+        MagicMock(status_code=404)
+    )
+
+    mock_api = MagicMock()
+    mock_api.repository_with_id.return_value = mock_repo
+
+    with patch("invenio_vcs.contrib.github.GitHubProvider._github", new=mock_api):
+        with pytest.raises(RepositoryAccessError):
+            provider.list_repository_webhooks("123")
 
 
 def test_vcs_provider_get_repository(vcs_provider: RepositoryServiceProvider):
